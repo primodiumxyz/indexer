@@ -1,11 +1,12 @@
 {
   "name": "@primodium/sync-stack",
-  "version": "1.0.4-alpha",
+  "version": "0.0.1",
   "description": "Modularized sync-stack heavily based on Lattice's MUD sync-store for modified custom indexer front-end.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/primodiumxyz/sync-stack.git"
+    "url": "https://github.com/primodiumxyz/mud-state-tools",
+    "directory": "./packages/sync-stack"
   },
   "type": "module",
   "exports": {

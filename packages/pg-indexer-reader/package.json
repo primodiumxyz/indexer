@@ -4,8 +4,8 @@
   "description": "Minimal Typescript indexer for Store",
   "repository": {
     "type": "git",
-    "url": "git@github.com:primodiumxyz/store-indexer-postgres-frontend.git",
-    "directory": "."
+    "url": "git@github.com:primodiumxyz/mud-state-tools.git",
+    "directory": "./packages/pg-indexer-read"
   },
   "license": "MIT",
   "type": "module",
