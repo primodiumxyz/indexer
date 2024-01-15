@@ -21,7 +21,7 @@ To properly remove docker networks and volumes run:
 pnpm indexer:clean
 ```
 
-**Note: crtl+c will only send termination signal to containers. It is recommended to run this time to time**
+**Note: Docker is required to easily create an instance of a local pg db, indexer writer, and our custom reader. Crtl+c will only send termination signal to containers. It is recommended to run this time to time**
 
 # Packages
 
