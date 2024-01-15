@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Hex, isHex } from "viem";
+import { isHex } from "viem";
 
 export const filterSchema = z.object({
   address: z.string().refine(isHex).optional(),
@@ -32,6 +32,7 @@ export const querySchema = z
   .refine(
     (data) => {
       const fields = ["where", "and", "or"];
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const definedFields = fields.filter((field) => data[field] !== undefined);
       return definedFields.length <= 1;
