@@ -9,6 +9,8 @@ WORKDIR /app
 FROM base AS prod-deps
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
+FROM prod-deps AS pg-indexer-reader
+
 # Expose the port the app runs on
 EXPOSE 3001
 
