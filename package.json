@@ -4,7 +4,7 @@
   "scripts": {
     "publish": "lerna publish",
     "build": "lerna run build",
-    "prepare": "husky install && (forge --version || pnpm foundry:up)",
+    "prepare": "husky install",
     "sort-package-json": "npx sort-package-json package.json 'packages/*/package.json'",
     "indexer:local": "pnpm --filter 'pg-indexer-reader' start:local",
     "indexer:clean": "pnpm --filter 'pg-indexer-reader' docker:clean"
