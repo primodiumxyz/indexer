@@ -41,6 +41,9 @@ pnpm:
 pnpm i @primodiumxyz/sync-stack
 ```
 
+## Architecture
+<img width="491" alt="image" src="https://github.com/primodiumxyz/mud-state-tools/assets/43505437/695436a5-1c14-4702-89bc-505798271cf2">
+
 ## Basic Usage
 
 ### Stream from RPC and Write to Console
