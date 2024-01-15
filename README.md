@@ -2,7 +2,9 @@
 
 Set of tools for reading data in MUD compliant projects.
 
-## Getting Started
+# Getting Started
+
+## Running a local indexer(via Docker):
 
 ### Requirements
 
