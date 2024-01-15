@@ -19,6 +19,9 @@ jobs:
           - image: ghcr.io/primodiumxyz/pg-indexer-reader
             target: pg-indexer-reader
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Setup
         uses: ./.github/actions/setup
 

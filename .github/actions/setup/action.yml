@@ -3,9 +3,6 @@ description: Setup pnpm and Node.js
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
       with:
