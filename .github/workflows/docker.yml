@@ -20,10 +20,10 @@ jobs:
             target: pg-indexer-reader
     steps:
       - name: Setup
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/setup.yml
 
       - name: Build
-        uses: ./.github/actions/build
+        uses: ./.github/actions/build.yml
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
