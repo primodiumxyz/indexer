@@ -3,8 +3,9 @@
 ## Getting Started
 
 ### Requirements
-
+- Node 14+
 - Docker
+- pnpm
 
 To start a local indexer on foundry chain run:
 
