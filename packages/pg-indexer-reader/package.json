@@ -1,6 +1,6 @@
 {
   "name": "@primodiumxyz/pg-indexer-reader",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Minimal Typescript indexer for Store",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "docker-compose.local.yml",
     ".dockerignore"
   ],
-  "scripts": {  
+  "scripts": {
     "build": "pnpm run build:js",
     "build:js": "tsup",
     "clean": "pnpm run clean:js",
