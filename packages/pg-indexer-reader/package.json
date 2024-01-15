@@ -12,8 +12,8 @@
   "main": "./dist/bin/postgres-frontend.js",
   "bin": {
     "postgres-frontend": "./dist/bin/postgres-frontend.js",
-    "local-docker-indexer": "pnpm run start:local",
-    "clean-local-docker-indexer": "pnpm run docker:clean"
+    "local-docker-indexer": "./dist/bin/local-docker-indexer.js",
+    "clean-local-docker-indexer": "./dist/bin/clean-local-docker-indexer.js"
   },
   "files": [
     "dist",
