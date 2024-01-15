@@ -2,6 +2,7 @@
   "name": "@primodiumxyz/mud-state-tools",
   "description": "Set of tools for reading data in MUD compliant projects.",
   "scripts": {
+    "build": "lerna run build",
     "prepare": "husky install && (forge --version || pnpm foundry:up)",
     "sort-package-json": "npx sort-package-json package.json 'packages/*/package.json'",
     "indexer:local": "pnpm --filter 'pg-indexer-reader' start:local",
@@ -22,9 +23,11 @@
     "concurrently": "^8.0.1",
     "eslint": "8.29.0",
     "husky": ">=6",
+    "lerna": "^8.0.2",
     "lint-staged": ">=10",
     "rimraf": "^3.0.2",
     "run-pty": "4.0.4",
     "typescript": "5.1.6"
-  }
+  },
+  "dependencies": {}
 }

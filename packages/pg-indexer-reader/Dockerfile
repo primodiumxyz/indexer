@@ -12,5 +12,5 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 # Expose the port the app runs on
 EXPOSE 3001
 
-# Command to run the faucet server
-CMD ["pnpm", "start:postgres-frontend"] 
+# Command to run indexer 
+CMD ["pnpm", "start"] 

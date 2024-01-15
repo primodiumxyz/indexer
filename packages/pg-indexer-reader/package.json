@@ -14,14 +14,18 @@
     "postgres-frontend": "./dist/bin/postgres-frontend.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "Dockerfile",
+    "docker-compose.local.yml",
+    ".dockerignore"
   ],
-  "scripts": {
+  "scripts": {  
     "build": "pnpm run build:js",
     "build:js": "tsup",
     "clean": "pnpm run clean:js",
     "clean:js": "rimraf dist",
-    "dev": "tsx watch bin/postgres-frontend",
+    "dev:watch": "tsx watch bin/postgres-frontend",
+    "dev": "tsx bin/postgres-frontend",
     "lint": "eslint .",
     "start": "NODE_ENV=production tsx dist/bin/postgres-frontend",
     "start:local": "docker-compose -f docker-compose.local.yml up --build",

@@ -1,0 +1,9 @@
+name: Build Packages
+description: Install dependencies and build packages
+runs:
+  using: composite
+  steps:
+    - name: Install dependencies
+      run: pnpm install --prefer-frozen-lockfile
+    - name: Run build
+      run: pnpm build
