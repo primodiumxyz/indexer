@@ -4,5 +4,15 @@
   "packages": [
     "packages/*"
   ],
-  "npmClient": "pnpm"
+  "npmClient": "pnpm",
+  "command": {
+    "version": {
+      "allowBranch": "main"
+    },
+    "publish": {
+      "allowBranch": "main",
+      "conventionalCommits": true,
+      "message": "chore(release): publish"
+    }
+  }
 }
