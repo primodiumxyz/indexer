@@ -3,7 +3,9 @@
   "description": "Set of tools for reading data in MUD compliant projects.",
   "scripts": {
     "prepare": "husky install && (forge --version || pnpm foundry:up)",
-    "sort-package-json": "npx sort-package-json package.json 'packages/*/package.json'"
+    "sort-package-json": "npx sort-package-json package.json 'packages/*/package.json'",
+    "indexer:local": "pnpm --filter 'pg-indexer-reader' start:local",
+    "indexer:clean": "pnpm --filter 'pg-indexer-reader' docker:clean"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",

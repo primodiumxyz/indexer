@@ -7,7 +7,7 @@ WORKDIR /app
 
 ##install dependencies
 FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 # Expose the port the app runs on
 EXPOSE 3001

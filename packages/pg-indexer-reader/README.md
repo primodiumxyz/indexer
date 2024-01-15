@@ -1,5 +1,23 @@
 # pg-indexer-reader
 
+## Getting Started
+
+### Requirements
+
+- Docker
+
+To start a local indexer on foundry chain run:
+
+```bash
+pnpm start:local
+```
+
+To properly remove docker networks and volumes run:
+
+```bash
+pnpm docker:clean
+```
+
 ## Endpoints
 
 ### 1. GET `/api/logs`

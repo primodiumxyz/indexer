@@ -2,6 +2,26 @@
 
 Set of tools for reading data in MUD compliant projects.
 
+## Getting Started
+
+### Requirements
+
+- Docker
+
+To start a local indexer on foundry chain run:
+
+```bash
+pnpm indexer:local
+```
+
+To properly remove docker networks and volumes run:
+
+```bash
+pnpm indexer:clean
+```
+
+**Note: crtl+c will only send termination signal to containers. It is recommended to run this time to time**
+
 # Packages
 
 ## `@primodiumxyz/pg-indexer-read`
