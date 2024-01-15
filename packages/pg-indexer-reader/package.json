@@ -11,7 +11,9 @@
   "type": "module",
   "main": "./dist/bin/postgres-frontend.js",
   "bin": {
-    "postgres-frontend": "./dist/bin/postgres-frontend.js"
+    "postgres-frontend": "./dist/bin/postgres-frontend.js",
+    "local-docker-indexer": "pnpm run start:local",
+    "clean-local-docker-indexer": "pnpm run docker:clean"
   },
   "files": [
     "dist",
@@ -29,7 +31,7 @@
     "lint": "eslint .",
     "start": "NODE_ENV=production tsx dist/bin/postgres-frontend",
     "start:local": "docker-compose -f docker-compose.local.yml up --build",
-    "docker:clean": "docker-compose -f docker-compose.local.yml down -v"
+    "clean:local": "docker-compose -f docker-compose.local.yml down -v"
   },
   "dependencies": {
     "@koa/cors": "^4.0.0",
