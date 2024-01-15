@@ -9,7 +9,9 @@
 A sync stack is comprised of a number of readers and writers:
 
 - **Reader**: Defines how records are retrieved from an external source (RPC, indexer, etc.)
+  - Included: RPC, Indexer, and Decoded Indexer (See [examples](#examples) and filter/query [schemas](/packages/pg-indexer-reader/README.md#schemas))
 - **Write**: Defines how these records are written to a store of choice. (recs, zustand, cache, etc.)
+  - Included: Recs (See [examples](#examples))
 - **Sync**: A helper function to create reusable sync stacks by passing in a number of readers and writers.
 
 ## Prerequisites
@@ -42,6 +44,7 @@ pnpm i @primodiumxyz/sync-stack
 ```
 
 ## Architecture
+
 <img width="491" alt="image" src="https://github.com/primodiumxyz/mud-state-tools/assets/43505437/695436a5-1c14-4702-89bc-505798271cf2">
 
 ## Basic Usage
