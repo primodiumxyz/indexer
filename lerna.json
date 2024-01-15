@@ -15,7 +15,7 @@
       "allowBranch": "main",
       "conventionalCommits": true,
       "message": "chore(release): publish",
-      // "yes": true
+      "yes": true
     }
   }
 }
