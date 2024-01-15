@@ -1,5 +1,5 @@
 {
-  "name": "@primodiumxyz/store-indexer-postgres-frontend",
+  "name": "@primodiumxyz/pg-indexer-read",
   "version": "0.0.1",
   "description": "Minimal Typescript indexer for Store",
   "repository": {
