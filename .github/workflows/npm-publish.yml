@@ -20,6 +20,6 @@ jobs:
         uses: ./.github/actions/build
 
       - name: Publish
-        run: pnpm publish
+        run: pnpm lerna-publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
