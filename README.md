@@ -7,6 +7,7 @@ Set of tools for reading data in MUD compliant projects.
 ### Requirements
 
 - Docker
+- pnpm
 
 To start a local indexer on foundry chain run:
 
