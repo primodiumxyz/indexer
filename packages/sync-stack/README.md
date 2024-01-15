@@ -8,7 +8,7 @@
 
 A sync stack is comprised of a number of readers and writers:
 
-- **Reader**: Defines how to records are retrieved from an external source (RPC, indexer, etc.)
+- **Reader**: Defines how records are retrieved from an external source (RPC, indexer, etc.)
 - **Write**: Defines how these records are written to a store of choice. (recs, zustand, cache, etc.)
 - **Sync**: A helper function to create reusable sync stacks by passing in a number of readers and writers.
 
