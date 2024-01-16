@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.7](https://github.com/primodiumxyz/mud-state-tools/compare/v0.0.6...v0.0.7) (2024-01-16)
+
+
+### Bug Fixes
+
+* update build command to include all bind ([cd64efe](https://github.com/primodiumxyz/mud-state-tools/commit/cd64efe59010865e6954a8487415ecc99eb4b696))
+
+
+
+
+
 ## [0.0.6](https://github.com/primodiumxyz/mud-state-tools/compare/v0.0.5...v0.0.6) (2024-01-15)
 
 
