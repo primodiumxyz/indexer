@@ -2,7 +2,7 @@
   "name": "@primodiumxyz/mud-state-tools",
   "description": "Set of tools for reading data in MUD compliant projects.",
   "scripts": {
-    "lerna-publish": "lerna publish",
+    "lerna-publish": "lerna publish --amend",
     "build": "lerna run build",
     "prepare": "husky install",
     "sort-package-json": "npx sort-package-json package.json 'packages/*/package.json'",
