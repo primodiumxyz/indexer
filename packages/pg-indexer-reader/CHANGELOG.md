@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.8](https://github.com/primodiumxyz/mud-state-tools/compare/v0.0.7...v0.0.8) (2024-01-16)
+
+
+### Bug Fixes
+
+* bin should run from package dir ([6e34103](https://github.com/primodiumxyz/mud-state-tools/commit/6e34103b3e5aa9fe5c5870625f87b331f5815369))
+
+
+
+
+
 ## [0.0.7](https://github.com/primodiumxyz/mud-state-tools/compare/v0.0.6...v0.0.7) (2024-01-16)
 
 
