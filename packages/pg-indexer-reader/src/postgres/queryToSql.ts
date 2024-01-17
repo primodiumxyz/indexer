@@ -1,10 +1,5 @@
 import { Sql, PendingQuery, Row } from "postgres";
-import {
-  Query,
-  Record,
-  convertIfHexOtherwiseReturnString,
-  tableNameToId,
-} from "../util/common";
+import { Query, Record, convertIfHexOtherwiseReturnString, tableNameToId } from "../util/common";
 import { snakeCase } from "change-case";
 import { isNotNull } from "@latticexyz/common/utils";
 
@@ -15,9 +10,7 @@ function _where(
   dbTableName: string,
   where: NonNullable<Query["where"]>
 ): PendingQuery<Row[]> {
-  const _condition = sql`${sql(schemaName)}.${sql(dbTableName)}.${sql(
-    where.column
-  )}`;
+  const _condition = sql`${sql(schemaName)}.${sql(dbTableName)}.${sql(where.column)}`;
   const _value = convertIfHexOtherwiseReturnString(where.value);
 
   switch (where.operation) {
@@ -39,24 +32,17 @@ function _where(
 }
 
 // Function to combine conditions with AND logic
-function _and(
-  sql: Sql,
-  conditions: PendingQuery<Row[]>[]
-): PendingQuery<Row[]> {
-  return sql`(${conditions.reduce(
-    (query, condition) => sql`${query} AND ${condition}`
-  )})`;
+function _and(sql: Sql, conditions: PendingQuery<Row[]>[]): PendingQuery<Row[]> {
+  return sql`(${conditions.reduce((query, condition) => sql`${query} AND ${condition}`)})`;
 }
 
 // Function to combine conditions with OR logic
 function _or(sql: Sql, conditions: PendingQuery<Row[]>[]): PendingQuery<Row[]> {
-  return sql`(${conditions.reduce(
-    (query, condition) => sql`${query} OR ${condition}`
-  )})`;
+  return sql`(${conditions.reduce((query, condition) => sql`${query} OR ${condition}`)})`;
 }
 
 function _union(sql: Sql, queries: PendingQuery<Row[]>[]) {
-  return queries.reduce((acc, query) => sql`${acc} UNION ${query}`);
+  return queries.reduce((acc, query) => sql`${acc} UNION ALL ${query}`);
 }
 
 function filterRecords(sql: Sql, query: PendingQuery<Row[]>, address: string) {
@@ -75,9 +61,7 @@ function filterRecords(sql: Sql, query: PendingQuery<Row[]>, address: string) {
         log_index AS "logIndex"
       FROM mud.records
       JOIN filter on filter.__key_bytes = mud.records.key_bytes AND filter.table_id = mud.records.table_id
-      WHERE mud.records.address = ${convertIfHexOtherwiseReturnString(
-        address
-      )} AND mud.records.is_deleted = false
+      WHERE mud.records.address = ${convertIfHexOtherwiseReturnString(address)} AND mud.records.is_deleted = false
   `;
 }
 
@@ -102,20 +86,16 @@ function getRecordsForTableIDs(sql: Sql, address: string, tableIDs: string[]) {
 }
 
 // Function to convert a query object into an SQL query
-export function toSQL(
-  sql: Sql,
-  address: string,
-  query: Query[]
-): PendingQuery<Record[]> {
+export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<Record[]> {
   const noConditionTableIDs: string[] = [];
 
   const queries = query
-    .map(({ tableName, where, and, or, tableType, namespace }) => {
+    .map(({ tableName, where, and, or, include, tableType, namespace }) => {
       const dbTableName = snakeCase(tableName);
       const tableId = tableNameToId(tableName, tableType);
       const schema = `${address}__${namespace}`;
 
-      if (!where && !and && !or) {
+      if (!where && !and && !or && !include) {
         noConditionTableIDs.push(tableId);
         return null;
       }
@@ -135,26 +115,42 @@ export function toSQL(
         );
       }
 
-      return sql`
-      SELECT __key_bytes, ${convertIfHexOtherwiseReturnString(
-        tableId
-      )} as table_id 
+      const _query = sql`
+      SELECT __key_bytes, ${convertIfHexOtherwiseReturnString(tableId)} as table_id 
       FROM ${sql(schema)}.${sql(dbTableName)}
       ${whereClause ? sql`WHERE ${whereClause}` : sql``}`;
+
+      if (include) {
+        return _union(sql, [
+          sql`
+        WITH base AS (
+          ${_query}
+        )
+        SELECT __key_bytes, table_id FROM base
+
+      `,
+          ...include.map(({ tableName, tableType }) => {
+            const dbTableName = snakeCase(tableName);
+            const tableId = tableNameToId(tableName, tableType);
+
+            return sql`
+            SELECT base.__key_bytes, ${convertIfHexOtherwiseReturnString(tableId)} as table_id
+            FROM base JOIN ${sql(schema)}.${sql(dbTableName)} ON ${sql(schema)}.${sql(
+              dbTableName
+            )}.__key_bytes = base.__key_bytes`;
+          }),
+        ]);
+      }
+
+      return _query;
     })
     .filter(isNotNull) as PendingQuery<Row[]>[];
 
-  const filteredRecords = queries.length
-    ? filterRecords(sql, _union(sql, queries), address)
-    : null;
+  const filteredRecords = queries.length ? filterRecords(sql, _union(sql, queries), address) : null;
 
-  const rawRecords = noConditionTableIDs.length
-    ? getRecordsForTableIDs(sql, address, noConditionTableIDs)
-    : null;
+  const rawRecords = noConditionTableIDs.length ? getRecordsForTableIDs(sql, address, noConditionTableIDs) : null;
 
-  const records = [filteredRecords, rawRecords].filter(
-    isNotNull
-  ) as PendingQuery<Row[]>[];
+  const records = [filteredRecords, rawRecords].filter(isNotNull) as PendingQuery<Row[]>[];
 
   return sql<Record[]>`
     WITH
