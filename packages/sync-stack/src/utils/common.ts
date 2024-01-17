@@ -8,6 +8,19 @@ export function isStorageAdapterBlock(
   return data && typeof data.blockNumber === "string" && Array.isArray(data.logs);
 }
 
+export function isStorageAdapterBlockIndexer(
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  data: any
+): data is Omit<StorageAdapterBlock, "blockNumber"> & { blockNumber: string; chunk: number; totalChunks: number } {
+  return (
+    data &&
+    typeof data.blockNumber === "string" &&
+    Array.isArray(data.logs) &&
+    typeof data.chunk === "number" &&
+    typeof data.totalChunks === "number"
+  );
+}
+
 export const createLogFilter =
   (filters: NonNullable<LogFilter["filters"]>) =>
   (log: StoreEventsLog): boolean =>
