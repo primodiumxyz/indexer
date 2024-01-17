@@ -47,6 +47,7 @@ jobs:
             type=match,pattern=@(.*),group=1
             type=match,pattern=@.*-(next),group=1
             type=ref,event=branch
+            type=ref,event=pr
             type=sha
 
       - name: Build and push Docker image
