@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.1.0...v0.2.0) (2024-01-17)
+
+
+### Features
+
+* add progress callback on start returning progress % ([f179140](https://github.com/primodiumxyz/mud-state-tools/commit/f179140474a04f67577ed5a459abe6316a3c8096))
+
+
+
+
+
 # [0.1.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.0.8...v0.1.0) (2024-01-17)
 
 
