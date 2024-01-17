@@ -10,10 +10,10 @@ export function createSync(options: SyncOptions): Sync {
         onProgress && onProgress(index, 0n, 0);
         unsubscribe.push(
           reader.subscribe((block) => {
-            onProgress && onProgress(index, block.blockNumber, block.progress ?? 1);
             for (const log of block.logs) {
               Array.isArray(writer) ? writer.forEach((write) => write(log)) : writer(log);
             }
+            onProgress && onProgress(index, block.blockNumber, block.progress ?? 1);
           })
         );
       }
