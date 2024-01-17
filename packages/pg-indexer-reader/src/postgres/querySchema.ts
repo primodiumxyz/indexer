@@ -14,6 +14,13 @@ export const filterSchema = z.object({
     .default([]),
 });
 
+const includeClauseSchema = z.array(
+  z.object({
+    tableName: z.string(),
+    tableType: z.enum(["offchainTable", "table"]).default("table"),
+  })
+);
+
 const whereClauseSchema = z.object({
   column: z.coerce.string(),
   operation: z.enum(["eq", "neq", "lt", "lte", "gt", "gte"]),
@@ -28,6 +35,7 @@ export const querySchema = z
     where: whereClauseSchema.optional(),
     and: whereClauseSchema.array().optional(),
     or: whereClauseSchema.array().optional(),
+    include: includeClauseSchema.optional(),
   })
   .refine(
     (data) => {
