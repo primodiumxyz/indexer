@@ -11,20 +11,24 @@ export function filterLogs(args: ReaderFilterRpcParams): Reader {
 
       eventEmitter.on("update", userCallback);
 
-      try {
-        (async () => {
+      (async () => {
+        try {
           for await (const { logs, toBlock } of fetchLogs({
             events: storeEventsAbi,
-            ...args,
+            fromBlock: args.fromBlock,
+            toBlock: args.toBlock,
+            publicClient: args.publicClient,
           })) {
-            eventEmitter.emit("update", { blockNumber: toBlock, logs });
+            const blocks = Number(toBlock - args.fromBlock);
+            const totalBlocks = Number(args.toBlock - args.fromBlock);
+            eventEmitter.emit("update", { blockNumber: toBlock, logs, progress: blocks / totalBlocks });
           }
-        })();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        eventEmitter.removeAllListeners("update");
-      }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          eventEmitter.removeAllListeners("update");
+        }
+      })();
 
       return () => {
         eventEmitter.removeAllListeners("update");

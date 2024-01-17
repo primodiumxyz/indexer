@@ -13,10 +13,7 @@ export type DecodedIndexerQuery = z.input<typeof dbQuerySchema>;
 
 export type LogFilter = z.input<typeof filterSchema>;
 
-export type FetchAndFilterLogsOptions = Omit<
-  FetchLogsOptions<StoreEventsAbi>,
-  "events"
-> & {
+export type FetchAndFilterLogsOptions = Omit<FetchLogsOptions<StoreEventsAbi>, "events"> & {
   logFilter?: LogFilter["filters"];
 };
 
@@ -27,7 +24,7 @@ export type ReaderSubscribeRpcParams = {
 };
 
 export type Reader = {
-  subscribe: (callback: (block: StorageAdapterBlock) => void) => () => void;
+  subscribe: (callback: (block: StorageAdapterBlock & { progress?: number }) => void) => () => void;
 };
 
 export type ReaderFilterIndexerParams = {
@@ -40,10 +37,7 @@ export type ReaderQueryDecodedIndexerParams = {
   query: DecodedIndexerQuery;
 };
 
-export type ReaderFilterRpcParams = Omit<
-  FetchLogsOptions<StoreEventsAbi>,
-  "events"
-> & {
+export type ReaderFilterRpcParams = Omit<FetchLogsOptions<StoreEventsAbi>, "events"> & {
   filter?: LogFilter;
 };
 
@@ -56,15 +50,9 @@ export type WriterRecsParams = {
 
 export type WriterAdapterFunctions = {
   set: (log: StorageAdapterLog & { eventName: "Store_SetRecord" }) => void;
-  updateStatic: (
-    log: StorageAdapterLog & { eventName: "Store_SpliceStaticData" }
-  ) => void;
-  updateDynamic: (
-    log: StorageAdapterLog & { eventName: "Store_SpliceDynamicData" }
-  ) => void;
-  delete: (
-    log: StorageAdapterLog & { eventName: "Store_DeleteRecord" }
-  ) => void;
+  updateStatic: (log: StorageAdapterLog & { eventName: "Store_SpliceStaticData" }) => void;
+  updateDynamic: (log: StorageAdapterLog & { eventName: "Store_SpliceDynamicData" }) => void;
+  delete: (log: StorageAdapterLog & { eventName: "Store_DeleteRecord" }) => void;
 };
 
 export type SyncOptions = {
@@ -73,6 +61,6 @@ export type SyncOptions = {
 };
 
 export type Sync = {
-  start: () => void;
+  start: (onProgress?: (index: number, blockNumber: bigint, progress: number) => void) => void;
   unsubscribe: () => void;
 };

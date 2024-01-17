@@ -2,13 +2,13 @@ import { EventEmitter } from "events";
 import { StorageAdapterBlock } from "@latticexyz/store-sync";
 
 import { ReaderQueryDecodedIndexerParams, Reader } from "../../types";
-import { isStorageAdapterBlock, processJSONStream } from "../../utils/common";
+import { isStorageAdapterBlock, isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 import { dbQuerySchema } from "../../utils/schema";
 
 export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
   const { indexerUrl, query } = params;
   return {
-    subscribe: (userCallback: (block: StorageAdapterBlock) => void) => {
+    subscribe: (userCallback) => {
       const eventEmitter = new EventEmitter();
 
       // Listen for the 'update' event
@@ -17,22 +17,22 @@ export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
       (async () => {
         try {
           const parsedInput = dbQuerySchema.parse(query);
-          const urlEncodedQuery = encodeURIComponent(
-            JSON.stringify(parsedInput)
-          );
+          const urlEncodedQuery = encodeURIComponent(JSON.stringify(parsedInput));
           const url = `${indexerUrl}/api/queryLogs?&input=${urlEncodedQuery}`;
           for await (const result of processJSONStream(url)) {
-            if (!isStorageAdapterBlock(result)) {
+            if (!isStorageAdapterBlockIndexer(result)) {
               eventEmitter.emit("update", {
                 blockNumber: 0n,
                 logs: [],
+                progress: 1,
               } as StorageAdapterBlock);
               return;
             }
 
             eventEmitter.emit("update", {
-              ...result,
               blockNumber: BigInt(result.blockNumber),
+              progress: result.chunk / result.totalChunks,
+              logs: result.logs,
             });
           }
         } catch (error) {
