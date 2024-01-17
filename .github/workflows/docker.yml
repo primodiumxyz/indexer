@@ -42,13 +42,6 @@ jobs:
         with:
           context: git
           images: ${{ matrix.image }}
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=match,pattern=@(.*),group=1
-            type=match,pattern=@.*-(next),group=1
-            type=ref,event=branch
-            type=ref,event=pr
-            type=sha
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4.2.1
