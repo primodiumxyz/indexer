@@ -1,6 +1,6 @@
 {
   "name": "@primodiumxyz/sync-stack",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Modularized sync-stack heavily based on Lattice's MUD sync-store for modified custom indexer front-end.",
   "license": "MIT",
   "repository": {

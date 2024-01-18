@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/primodiumxyz/mud-state-tools/compare/v0.2.1...v0.2.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* NaN progress on matching to and from block, let errors bubble to client ([48747fa](https://github.com/primodiumxyz/mud-state-tools/commit/48747fac41e7c670873d8ec0d30ed64cc7eb0f08))
+
+
+
+
+
 ## [0.2.1](https://github.com/primodiumxyz/mud-state-tools/compare/v0.2.0...v0.2.1) (2024-01-17)
 
 
