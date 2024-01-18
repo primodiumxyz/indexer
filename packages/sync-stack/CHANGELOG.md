@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.2.2...v0.3.0) (2024-01-18)
+
+
+### Features
+
+* add error callback to readers and expose in sync ([7ad0098](https://github.com/primodiumxyz/mud-state-tools/commit/7ad0098e7c65a21e6b5e286bad248a7fd86fc711))
+
+
+
+
+
 ## [0.2.2](https://github.com/primodiumxyz/mud-state-tools/compare/v0.2.1...v0.2.2) (2024-01-18)
 
 
