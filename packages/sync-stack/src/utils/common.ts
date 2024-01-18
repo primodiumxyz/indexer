@@ -64,11 +64,7 @@ export async function* processJSONStream(url: string) {
 
     for (const chunk of chunks) {
       if (chunk) {
-        try {
-          yield JSON.parse(chunk);
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
+        yield JSON.parse(chunk);
       }
     }
   }

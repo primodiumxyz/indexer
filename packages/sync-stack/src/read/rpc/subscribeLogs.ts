@@ -27,9 +27,7 @@ function subscribe(
 
   const id = subs.length;
   subs.push({ id, filter, callback });
-  debug(
-    `sub event - client: ${publicClient.name}, id: ${id}, subs: ${subs.length}`
-  );
+  debug(`sub event - client: ${publicClient.name}, id: ${id}, subs: ${subs.length}`);
   return id;
 }
 
@@ -39,11 +37,7 @@ function unsubscribe(publicClient: PublicClient, subscriptionId: number): void {
   if (!subs) return;
 
   if (subs.length === 1) {
-    debug(
-      `unsub event - client: ${
-        publicClient.name
-      }, id: ${subscriptionId}, subs: ${subs.length - 1}`
-    );
+    debug(`unsub event - client: ${publicClient.name}, id: ${subscriptionId}, subs: ${subs.length - 1}`);
     debug(`no listeners, unsubscribing from watch event`);
 
     //unsub from watch event
@@ -61,11 +55,7 @@ function unsubscribe(publicClient: PublicClient, subscriptionId: number): void {
     subs.filter((sub) => sub.id !== subscriptionId)
   );
 
-  debug(
-    `unsub event - client: ${publicClient.name}, id: ${subscriptionId}, subs: ${
-      subs.length - 1
-    }`
-  );
+  debug(`unsub event - client: ${publicClient.name}, id: ${subscriptionId}, subs: ${subs.length - 1}`);
 }
 
 function initializeWatchEvent(args: ReaderSubscribeRpcParams) {
@@ -93,12 +83,8 @@ function initializeWatchEvent(args: ReaderSubscribeRpcParams) {
       }
 
       subs?.forEach(({ filter, callback }) => {
-        const filteredLogs = filter
-          ? logs.filter(createLogFilter(filter))
-          : logs;
-        const blocks = groupLogsByBlockNumber(
-          filteredLogs
-        ) as StorageAdapterBlock[];
+        const filteredLogs = filter ? logs.filter(createLogFilter(filter)) : logs;
+        const blocks = groupLogsByBlockNumber(filteredLogs) as StorageAdapterBlock[];
         debug(
           `client: ${publicClient.name}, subs: ${subs.length}: logs: ${logs.length}, filteredLogs: ${filteredLogs.length}, blocks: ${blocks.length}`
         );
@@ -121,12 +107,8 @@ export function subscribeLogs(args: ReaderSubscribeRpcParams): Reader {
   }
 
   return {
-    subscribe: (userCallback: (logs: StorageAdapterBlock) => void) => {
-      const subscriptionId = subscribe(
-        args.publicClient,
-        args.logFilter,
-        userCallback
-      );
+    subscribe: (userCallback) => {
+      const subscriptionId = subscribe(args.publicClient, args.logFilter, userCallback);
       return () => unsubscribe(args.publicClient, subscriptionId);
     },
   };

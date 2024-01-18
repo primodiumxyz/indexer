@@ -5,7 +5,7 @@ export function createSync(options: SyncOptions): Sync {
   const unsubscribe: (() => void)[] = [];
 
   const sync: Sync = {
-    start: (onProgress) => {
+    start: (onProgress, error) => {
       function subToReader(reader: Reader, index: number) {
         onProgress && onProgress(index, 0n, 0);
         unsubscribe.push(
@@ -14,7 +14,7 @@ export function createSync(options: SyncOptions): Sync {
               Array.isArray(writer) ? writer.forEach((write) => write(log)) : writer(log);
             }
             onProgress && onProgress(index, block.blockNumber, block.progress ?? 1);
-          })
+          }, error)
         );
       }
 
