@@ -6,11 +6,14 @@ import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/com
 export const filterLogs = (args: ReaderFilterIndexerParams): Reader => {
   const { indexerUrl, filter } = args;
   return {
-    subscribe: (userCallback) => {
+    subscribe: (userCallback, errorCallback) => {
       const eventEmitter = new EventEmitter();
 
       // Listen for the 'update' event
       eventEmitter.on("update", userCallback);
+
+      // Listen for the 'error' event
+      if (errorCallback) eventEmitter.on("error", errorCallback);
 
       // Start fetching the logs
       (async () => {
@@ -33,13 +36,17 @@ export const filterLogs = (args: ReaderFilterIndexerParams): Reader => {
               progress: result.chunk / result.totalChunks,
             });
           }
+        } catch (err) {
+          eventEmitter.emit("error", err);
         } finally {
           eventEmitter.removeAllListeners("update");
+          eventEmitter.removeAllListeners("error");
         }
       })();
 
       return () => {
         eventEmitter.removeAllListeners("update");
+        eventEmitter.removeAllListeners("error");
       };
     },
   };

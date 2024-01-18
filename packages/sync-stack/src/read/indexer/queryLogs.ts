@@ -2,17 +2,20 @@ import { EventEmitter } from "events";
 import { StorageAdapterBlock } from "@latticexyz/store-sync";
 
 import { ReaderQueryDecodedIndexerParams, Reader } from "../../types";
-import { isStorageAdapterBlock, isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
+import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 import { dbQuerySchema } from "../../utils/schema";
 
 export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
   const { indexerUrl, query } = params;
   return {
-    subscribe: (userCallback) => {
+    subscribe: (userCallback, errorCallback) => {
       const eventEmitter = new EventEmitter();
 
       // Listen for the 'update' event
       eventEmitter.on("update", userCallback);
+
+      // Listen for the 'error' event
+      if (errorCallback) eventEmitter.on("error", errorCallback);
 
       (async () => {
         try {
@@ -20,6 +23,7 @@ export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
           const urlEncodedQuery = encodeURIComponent(JSON.stringify(parsedInput));
           const url = `${indexerUrl}/api/queryLogs?&input=${urlEncodedQuery}`;
           for await (const result of processJSONStream(url)) {
+            ``;
             if (!isStorageAdapterBlockIndexer(result)) {
               eventEmitter.emit("update", {
                 blockNumber: 0n,
@@ -35,13 +39,17 @@ export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
               logs: result.logs,
             });
           }
+        } catch (err) {
+          eventEmitter.emit("error", err);
         } finally {
           eventEmitter.removeAllListeners("update");
+          eventEmitter.removeAllListeners("error");
         }
       })();
 
       return () => {
         eventEmitter.removeAllListeners("update");
+        eventEmitter.removeAllListeners("error");
       };
     },
   };

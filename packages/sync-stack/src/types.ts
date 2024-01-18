@@ -24,7 +24,11 @@ export type ReaderSubscribeRpcParams = {
 };
 
 export type Reader = {
-  subscribe: (callback: (block: StorageAdapterBlock & { progress?: number }) => void) => () => void;
+  subscribe: (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback: (block: StorageAdapterBlock & { progress?: number }) => void,
+    errorCallback?: (err: any) => void
+  ) => () => void;
 };
 
 export type ReaderFilterIndexerParams = {
@@ -61,6 +65,10 @@ export type SyncOptions = {
 };
 
 export type Sync = {
-  start: (onProgress?: (index: number, blockNumber: bigint, progress: number) => void) => void;
+  start: (
+    onProgress?: (index: number, blockNumber: bigint, progress: number) => void,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error?: (err: any) => void
+  ) => void;
   unsubscribe: () => void;
 };

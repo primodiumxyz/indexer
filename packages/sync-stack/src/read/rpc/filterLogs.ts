@@ -1,15 +1,18 @@
 import { EventEmitter } from "events";
 import { fetchLogs } from "@latticexyz/block-logs-stream";
 import { storeEventsAbi } from "@latticexyz/store";
-import { StorageAdapterBlock } from "@latticexyz/store-sync";
 import { ReaderFilterRpcParams, Reader } from "../../types";
 
 export function filterLogs(args: ReaderFilterRpcParams): Reader {
   return {
-    subscribe: (userCallback: (block: StorageAdapterBlock) => void) => {
+    subscribe: (userCallback, errorCallback) => {
       const eventEmitter = new EventEmitter();
 
+      // Listen for the 'update' event
       eventEmitter.on("update", userCallback);
+
+      // Listen for the 'error' event
+      if (errorCallback) eventEmitter.on("error", errorCallback);
 
       (async () => {
         try {
@@ -18,6 +21,7 @@ export function filterLogs(args: ReaderFilterRpcParams): Reader {
             fromBlock: args.fromBlock,
             toBlock: args.toBlock,
             publicClient: args.publicClient,
+            maxBlockRange: args.maxBlockRange,
           })) {
             const blocks = Number(toBlock - args.fromBlock);
             const totalBlocks = Number(args.toBlock - args.fromBlock);
@@ -27,13 +31,17 @@ export function filterLogs(args: ReaderFilterRpcParams): Reader {
               progress: totalBlocks ? blocks / totalBlocks : 1,
             });
           }
+        } catch (err) {
+          eventEmitter.emit("error", err);
         } finally {
           eventEmitter.removeAllListeners("update");
+          eventEmitter.removeAllListeners("error");
         }
       })();
 
       return () => {
         eventEmitter.removeAllListeners("update");
+        eventEmitter.removeAllListeners("error");
       };
     },
   };
