@@ -33,8 +33,6 @@ export const filterLogs = (args: ReaderFilterIndexerParams): Reader => {
               progress: result.chunk / result.totalChunks,
             });
           }
-        } catch (error) {
-          console.error(error);
         } finally {
           eventEmitter.removeAllListeners("update");
         }

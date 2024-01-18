@@ -35,8 +35,6 @@ export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
               logs: result.logs,
             });
           }
-        } catch (error) {
-          console.error(error);
         } finally {
           eventEmitter.removeAllListeners("update");
         }

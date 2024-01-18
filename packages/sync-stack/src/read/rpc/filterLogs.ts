@@ -21,10 +21,12 @@ export function filterLogs(args: ReaderFilterRpcParams): Reader {
           })) {
             const blocks = Number(toBlock - args.fromBlock);
             const totalBlocks = Number(args.toBlock - args.fromBlock);
-            eventEmitter.emit("update", { blockNumber: toBlock, logs, progress: blocks / totalBlocks });
+            eventEmitter.emit("update", {
+              blockNumber: toBlock,
+              logs,
+              progress: totalBlocks ? blocks / totalBlocks : 1,
+            });
           }
-        } catch (error) {
-          console.error(error);
         } finally {
           eventEmitter.removeAllListeners("update");
         }
