@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/primodiumxyz/mud-state-tools/compare/v0.3.0...v0.3.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* add preserve symlinks in tsconfig ([786dc21](https://github.com/primodiumxyz/mud-state-tools/commit/786dc219fa8c796326700578c3c1ed70680066db))
+
+
+
+
+
 # [0.3.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.2.2...v0.3.0) (2024-01-18)
 
 
