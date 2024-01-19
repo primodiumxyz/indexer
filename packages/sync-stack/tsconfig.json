@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "resolveJsonModule": true,
-    // "preserveSymlinks": true,
+    "preserveSymlinks": true,
     "emitDeclarationOnly": true
   },
   "include": ["src"],
