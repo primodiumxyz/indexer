@@ -1,27 +1,19 @@
-import { hexKeyTupleToEntity } from "@latticexyz/store-sync/recs";
 import { decodeValueArgs } from "@latticexyz/protocol-parser";
 import { hexToResource, spliceHex } from "@latticexyz/common";
-import {
-  getComponentValue,
-  removeComponent,
-  setComponent,
-} from "@latticexyz/recs";
-import { StorageAdapterLog } from "@latticexyz/store-sync";
+import { getComponentValue, removeComponent, setComponent } from "@latticexyz/recs";
 import { Hex, size } from "viem";
 
 import { createWriter } from "./createrWriter";
 import { debug } from "../../utils/debug";
-import { flattenSchema } from "../../utils/recs";
-import { WriterRecsParams } from "../../types";
+import { flattenSchema, hexKeyTupleToEntity } from "../../utils/recs";
+import { StorageAdapterLog, WriterRecsParams } from "../../types";
 
 export const recsWriter = ({ world, tables }: WriterRecsParams) => {
   function processLog(log: StorageAdapterLog) {
     const { namespace, name } = hexToResource(log.args.tableId);
 
     const component = world.components.find((c) => c.id === log.args.tableId);
-    const tableKey = Object.keys(tables).find(
-      (c) => tables[c].tableId === log.args.tableId
-    );
+    const tableKey = Object.keys(tables).find((c) => tables[c].tableId === log.args.tableId);
     const table = tableKey ? tables[tableKey] : undefined;
 
     if (!component) {
@@ -30,9 +22,7 @@ export const recsWriter = ({ world, tables }: WriterRecsParams) => {
     }
 
     if (!table) {
-      debug(
-        `skipping update for unknown table: ${namespace}:${name} at ${log.address}`
-      );
+      debug(`skipping update for unknown table: ${namespace}:${name} at ${log.address}`);
       return;
     }
 
@@ -70,12 +60,7 @@ export const recsWriter = ({ world, tables }: WriterRecsParams) => {
 
       const previousValue = getComponentValue(component, entity);
       const previousStaticData = (previousValue?.__staticData as Hex) ?? "0x";
-      const newStaticData = spliceHex(
-        previousStaticData,
-        log.args.start,
-        size(log.args.data),
-        log.args.data
-      );
+      const newStaticData = spliceHex(previousStaticData, log.args.start, size(log.args.data), log.args.data);
       const newValue = decodeValueArgs(flattenSchema(table.valueSchema), {
         staticData: newStaticData,
         encodedLengths: (previousValue?.__encodedLengths as Hex) ?? "0x",
@@ -103,12 +88,7 @@ export const recsWriter = ({ world, tables }: WriterRecsParams) => {
 
       const previousValue = getComponentValue(component, entity);
       const previousDynamicData = (previousValue?.__dynamicData as Hex) ?? "0x";
-      const newDynamicData = spliceHex(
-        previousDynamicData,
-        log.args.start,
-        log.args.deleteCount,
-        log.args.data
-      );
+      const newDynamicData = spliceHex(previousDynamicData, log.args.start, log.args.deleteCount, log.args.data);
       const newValue = decodeValueArgs(flattenSchema(table.valueSchema), {
         staticData: (previousValue?.__staticData as Hex) ?? "0x",
         encodedLengths: log.args.encodedLengths,

@@ -1,10 +1,9 @@
 import { groupLogsByBlockNumber } from "@latticexyz/block-logs-stream";
 import { storeEventsAbi } from "@latticexyz/store";
-import { StorageAdapterBlock } from "@latticexyz/store-sync";
 import { PublicClient, WatchEventReturnType } from "viem";
 
 import { createLogFilter } from "../../utils/common";
-import { LogFilter, Reader, ReaderSubscribeRpcParams } from "../../types";
+import { LogFilter, Reader, ReaderSubscribeRpcParams, StorageAdapterBlock } from "../../types";
 import { debug, error } from "../../utils/debug";
 
 type Subscription = {

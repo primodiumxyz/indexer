@@ -141,9 +141,6 @@ importers:
       '@latticexyz/store':
         specifier: 2.0.0-main-735d957c
         version: 2.0.0-main-735d957c(typescript@5.1.6)
-      '@latticexyz/store-sync':
-        specifier: 2.0.0-main-735d957c
-        version: 2.0.0-main-735d957c(react@18.2.0)(typescript@5.1.6)
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -1128,55 +1125,6 @@ packages:
       - zod
     dev: false
 
-  /@latticexyz/store-sync@2.0.0-main-735d957c(react@18.2.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-3hI8Wvn0ALjFvjOtNGwH5yoaRoITS5w+3p+TkgDs5Rykynz3bS8JIVm2nVT4sQFxtKRrZe9fWJF43Oemwu55yw==}
-    dependencies:
-      '@latticexyz/block-logs-stream': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/common': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/protocol-parser': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/recs': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/schema-type': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/store': 2.0.0-main-735d957c(typescript@5.1.6)
-      '@latticexyz/world': 2.0.0-main-735d957c(typescript@5.1.6)
-      '@trpc/client': 10.34.0(@trpc/server@10.34.0)
-      '@trpc/server': 10.34.0
-      change-case: 5.4.2
-      debug: 4.3.4
-      drizzle-orm: 0.28.6(kysely@0.26.3)(postgres@3.3.5)(sql.js@1.9.0)
-      kysely: 0.26.3
-      postgres: 3.3.5
-      rxjs: 7.5.5
-      sql.js: 1.9.0
-      superjson: 1.13.3
-      viem: 1.14.0(typescript@5.1.6)(zod@3.22.4)
-      zod: 3.22.4
-      zustand: 4.4.7(react@18.2.0)
-    transitivePeerDependencies:
-      - '@aws-sdk/client-rds-data'
-      - '@cloudflare/workers-types'
-      - '@libsql/client'
-      - '@neondatabase/serverless'
-      - '@opentelemetry/api'
-      - '@planetscale/database'
-      - '@types/better-sqlite3'
-      - '@types/pg'
-      - '@types/react'
-      - '@types/sql.js'
-      - '@vercel/postgres'
-      - better-sqlite3
-      - bufferutil
-      - bun-types
-      - immer
-      - knex
-      - mysql2
-      - pg
-      - react
-      - sqlite3
-      - supports-color
-      - typescript
-      - utf-8-validate
-    dev: false
-
   /@latticexyz/store-sync@2.0.0-main-d3f0d32f(react@18.2.0)(typescript@5.1.6):
     resolution: {integrity: sha512-P86Dtsh5X0E3Sg/u3iA4bbGp6DtbVHtYu4KvpkcJ6IIVmjcyncfsbX+PUzaFBY6kysf7Qo54DlZrpM1w47OO9g==}
     dependencies:
@@ -1272,23 +1220,6 @@ packages:
       mobx: 6.12.0
       proxy-deep: 3.1.1
       rxjs: 7.5.5
-    dev: false
-
-  /@latticexyz/world@2.0.0-main-735d957c(typescript@5.1.6):
-    resolution: {integrity: sha512-LAQ0DpzYPdqNCjmjw8P/51PMDVWYKDfdx8F7QqJl14FhJFGVmIn/VnK7kOfHc0Sv3dh8Twuoz4kifkjSSvoCng==}
-    dependencies:
-      '@latticexyz/common': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/config': 2.0.0-main-735d957c(typescript@5.1.6)
-      '@latticexyz/schema-type': 2.0.0-main-735d957c(typescript@5.1.6)(zod@3.22.4)
-      '@latticexyz/store': 2.0.0-main-735d957c(typescript@5.1.6)
-      abitype: 0.9.8(typescript@5.1.6)(zod@3.22.4)
-      viem: 1.14.0(typescript@5.1.6)(zod@3.22.4)
-      zod: 3.22.4
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - typescript
-      - utf-8-validate
     dev: false
 
   /@latticexyz/world@2.0.0-main-d3f0d32f(typescript@5.1.6):

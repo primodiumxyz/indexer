@@ -13,10 +13,9 @@
     ".": "./dist/index.js"
   },
   "main": "./dist/index.js",
-  "types": "src/index.ts",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "build": "pnpm run build:js",
@@ -33,7 +32,6 @@
     "@latticexyz/recs": "2.0.0-main-735d957c",
     "@latticexyz/schema-type": "2.0.0-main-735d957c",
     "@latticexyz/store": "2.0.0-main-735d957c",
-    "@latticexyz/store-sync": "2.0.0-main-735d957c",
     "debug": "^4.3.4",
     "viem": "1.14.0",
     "zod": "^3.22.4"

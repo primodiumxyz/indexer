@@ -1,9 +1,27 @@
 import { Entity } from "@latticexyz/recs";
-import { Table } from "@latticexyz/store-sync";
-import { encodeEntity } from "@latticexyz/store-sync/recs";
+import { KeySchema, SchemaToPrimitives } from "@latticexyz/protocol-parser";
 import { mapObject } from "@latticexyz/common/utils";
 import { ValueSchema } from "@latticexyz/store";
-import { stringToHex } from "viem";
+import { stringToHex, encodeAbiParameters, Hex, concatHex } from "viem";
+import { Table } from "../types";
+
+export function hexKeyTupleToEntity(hexKeyTuple: readonly Hex[]): Entity {
+  return concatHex(hexKeyTuple as Hex[]) as Entity;
+}
+
+export function encodeEntity<TKeySchema extends KeySchema>(
+  keySchema: TKeySchema,
+  key: SchemaToPrimitives<TKeySchema>
+): Entity {
+  if (Object.keys(keySchema).length !== Object.keys(key).length) {
+    throw new Error(
+      `key length ${Object.keys(key).length} does not match key schema length ${Object.keys(keySchema).length}`
+    );
+  }
+  return hexKeyTupleToEntity(
+    Object.entries(keySchema).map(([keyName, type]) => encodeAbiParameters([{ type }], [key[keyName]]))
+  );
+}
 
 export function getTableEntity(table: Pick<Table, "address" | "namespace" | "name">): Entity {
   return encodeEntity(

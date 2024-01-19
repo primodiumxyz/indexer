@@ -10,7 +10,6 @@ import { compress } from "../../util/compress";
 import { dbQuerySchema, filterSchema } from "../querySchema";
 import { toSQL } from "../queryToSql";
 import { Readable } from "stream";
-import { StorageAdapterLog } from "@latticexyz/store-sync";
 
 export function api(database: Sql): Middleware {
   const router = new Router();
@@ -20,9 +19,7 @@ export function api(database: Sql): Middleware {
     let options: ReturnType<typeof filterSchema.parse>;
 
     try {
-      options = filterSchema.parse(
-        typeof ctx.query.input === "string" ? JSON.parse(ctx.query.input) : {}
-      );
+      options = filterSchema.parse(typeof ctx.query.input === "string" ? JSON.parse(ctx.query.input) : {});
     } catch (e) {
       ctx.status = 400;
       ctx.body = JSON.stringify(e);
@@ -44,11 +41,7 @@ export function api(database: Sql): Middleware {
         ctx.body = JSON.stringify({
           message: "no logs found",
         });
-        error(
-          `no logs found for, address ${
-            options.address
-          }, filters ${JSON.stringify(options.filters)}`
-        );
+        error(`no logs found for, address ${options.address}, filters ${JSON.stringify(options.filters)}`);
         return;
       }
 
@@ -90,9 +83,7 @@ export function api(database: Sql): Middleware {
     const benchmark = createBenchmark("postgres:logs");
 
     try {
-      const input = dbQuerySchema.parse(
-        typeof ctx.query.input === "string" ? JSON.parse(ctx.query.input) : {}
-      );
+      const input = dbQuerySchema.parse(typeof ctx.query.input === "string" ? JSON.parse(ctx.query.input) : {});
 
       const records = await toSQL(database, input.address, input.queries);
       benchmark("query records");

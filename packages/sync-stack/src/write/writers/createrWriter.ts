@@ -1,6 +1,4 @@
-import { StorageAdapterLog } from "@latticexyz/store-sync";
-
-import { Writer, WriterAdapterFunctions } from "../../types";
+import { StorageAdapterLog, Writer, WriterAdapterFunctions } from "../../types";
 import { debug } from "../../utils/debug";
 
 export function createWriter(storeFn: WriterAdapterFunctions): Writer {

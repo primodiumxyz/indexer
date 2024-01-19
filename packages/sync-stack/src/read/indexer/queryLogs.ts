@@ -1,7 +1,5 @@
 import { EventEmitter } from "events";
-import { StorageAdapterBlock } from "@latticexyz/store-sync";
-
-import { ReaderQueryDecodedIndexerParams, Reader } from "../../types";
+import { ReaderQueryDecodedIndexerParams, Reader, StorageAdapterBlock } from "../../types";
 import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 import { dbQuerySchema } from "../../utils/schema";
 

@@ -1,4 +1,4 @@
-import { Hex, stringToHex } from "viem";
+import { Hex } from "viem";
 import { z } from "zod";
 import { dbQuerySchema, querySchema } from "../postgres/querySchema";
 import { resourceToHex } from "@latticexyz/common";
@@ -36,10 +36,7 @@ export function convertIfHexOtherwiseReturnString(inputString: string | Hex) {
   return inputString;
 }
 
-export function tableNameToId(
-  tableName: string,
-  tableType: Query["tableType"]
-): Hex {
+export function tableNameToId(tableName: string, tableType: Query["tableType"]): Hex {
   return resourceToHex({
     name: tableName,
     type: tableType,

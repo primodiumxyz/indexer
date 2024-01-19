@@ -1,5 +1,4 @@
-import { StorageAdapterBlock, StoreEventsLog } from "@latticexyz/store-sync";
-import { LogFilter } from "../types";
+import { LogFilter, StorageAdapterBlock, StoreEventsLog } from "../types";
 
 export function isStorageAdapterBlock(
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
