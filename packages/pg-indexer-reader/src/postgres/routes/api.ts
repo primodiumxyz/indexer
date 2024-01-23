@@ -29,6 +29,7 @@ export function api(database: Sql): Middleware {
 
     try {
       options.filters = options.filters.length > 0 ? [...options.filters] : [];
+
       const records = await queryLogs(database, options ?? {}).execute();
       benchmark("query records");
 
@@ -84,7 +85,7 @@ export function api(database: Sql): Middleware {
 
     try {
       const input = dbQuerySchema.parse(typeof ctx.query.input === "string" ? JSON.parse(ctx.query.input) : {});
-
+      console.log(await toSQL(database, input.address, input.queries).describe());
       const records = await toSQL(database, input.address, input.queries);
       benchmark("query records");
 

@@ -115,33 +115,25 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
         );
       }
 
-      const _query = sql`
-      SELECT __key_bytes, ${convertIfHexOtherwiseReturnString(tableId)} as table_id 
-      FROM ${sql(schema)}.${sql(dbTableName)}
-      ${whereClause ? sql`WHERE ${whereClause}` : sql``}`;
+      let _query = sql`
+        SELECT __key_bytes, ${convertIfHexOtherwiseReturnString(tableId)} as table_id 
+        FROM ${sql(schema)}.${sql(dbTableName)}
+        ${whereClause ? sql`WHERE ${whereClause}` : sql``}`;
 
-      if (include) {
-        return _union(sql, [
-          sql`
-        WITH base AS (
-          ${_query}
-        )
-        SELECT __key_bytes, table_id FROM base
+      if (include && include.length) {
+        const includeQueries = include.map(({ tableName, tableType, on }) => {
+          const joinTableName = snakeCase(tableName);
+          const joinTableId = tableNameToId(tableName, tableType);
+          return sql`
+            SELECT ${sql(schema)}.${sql(joinTableName)}.__key_bytes, ${convertIfHexOtherwiseReturnString(
+            joinTableId
+          )} as table_id
+            FROM (${_query}) AS base
+            JOIN ${sql(schema)}.${sql(joinTableName)}
+            ON ${sql(schema)}.${sql(joinTableName)}.${sql(on)} = base.__key_bytes`;
+        });
 
-      `,
-          ...include.map(({ tableName, tableType, on }) => {
-            const dbTableName = snakeCase(tableName);
-            const tableId = tableNameToId(tableName, tableType);
-
-            return sql`
-            SELECT ${sql(schema)}.${sql(dbTableName)}.__key_bytes, ${convertIfHexOtherwiseReturnString(
-              tableId
-            )} as table_id
-            FROM base JOIN ${sql(schema)}.${sql(dbTableName)} ON ${sql(schema)}.${sql(dbTableName)}.${sql(
-              on
-            )} = base.__key_bytes`;
-          }),
-        ]);
+        _query = _union(sql, [_query, ...includeQueries]);
       }
 
       return _query;
