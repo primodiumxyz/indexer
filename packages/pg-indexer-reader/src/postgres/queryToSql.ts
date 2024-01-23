@@ -129,15 +129,17 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
         SELECT __key_bytes, table_id FROM base
 
       `,
-          ...include.map(({ tableName, tableType }) => {
+          ...include.map(({ tableName, tableType, on }) => {
             const dbTableName = snakeCase(tableName);
             const tableId = tableNameToId(tableName, tableType);
 
             return sql`
-            SELECT base.__key_bytes, ${convertIfHexOtherwiseReturnString(tableId)} as table_id
-            FROM base JOIN ${sql(schema)}.${sql(dbTableName)} ON ${sql(schema)}.${sql(
-              dbTableName
-            )}.__key_bytes = base.__key_bytes`;
+            SELECT ${sql(schema)}.${sql(dbTableName)}.__key_bytes, ${convertIfHexOtherwiseReturnString(
+              tableId
+            )} as table_id
+            FROM base JOIN ${sql(schema)}.${sql(dbTableName)} ON ${sql(schema)}.${sql(dbTableName)}.${sql(
+              on
+            )} = base.__key_bytes`;
           }),
         ]);
       }

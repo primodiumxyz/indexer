@@ -7,17 +7,16 @@ const reader = Read.fromDecodedIndexer.query({
     address: WORLD_ADDRESS,
     queries: [
       {
-        tableName: "Score",
-        and: [
+        tableName: "Position",
+        where: {
+          column: "__key_bytes",
+          operation: "eq",
+          value: "0x83dd2fd6d9f822f4af640fef65513792462aedae397fa81159452ccc35327d0e",
+        },
+        include: [
           {
-            column: "value",
-            operation: "gt",
-            value: 50_000_000n,
-          },
-          {
-            column: "value",
-            operation: "lte",
-            value: 100_000_000n,
+            tableName: "OwnedBy",
+            on: "entity",
           },
         ],
       },
@@ -26,5 +25,5 @@ const reader = Read.fromDecodedIndexer.query({
 });
 
 reader.subscribe((logs) => {
-  console.log(logs);
+  console.log(logs.logs);
 });
