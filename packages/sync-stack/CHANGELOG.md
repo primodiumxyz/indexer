@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.1...v0.4.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* remove old store-sync package import ([84b4b2b](https://github.com/primodiumxyz/mud-state-tools/commit/84b4b2bb2e149de20ff7c68bb3def4723f20e4f1))
+
+
+
+
+
 # [0.4.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.3.2...v0.4.0) (2024-01-23)
 
 
