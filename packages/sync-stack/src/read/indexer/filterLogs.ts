@@ -1,6 +1,5 @@
 import { EventEmitter } from "events";
-import { StorageAdapterBlock } from "@latticexyz/store-sync";
-import { ReaderFilterIndexerParams, Reader } from "../../types";
+import { ReaderFilterIndexerParams, Reader, StorageAdapterBlock } from "../../types";
 import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 
 export const filterLogs = (args: ReaderFilterIndexerParams): Reader => {
