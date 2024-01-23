@@ -32,10 +32,6 @@ export function api(database: Sql): Middleware {
       const records = await queryLogs(database, options ?? {}).execute();
       benchmark("query records");
 
-      const blockNumber = records[0].chainBlockNumber;
-      const logs = records.map(recordToLog);
-      benchmark("map records to logs");
-
       if (records.length === 0) {
         ctx.status = 404;
         ctx.body = JSON.stringify({
@@ -44,6 +40,10 @@ export function api(database: Sql): Middleware {
         error(`no logs found for, address ${options.address}, filters ${JSON.stringify(options.filters)}`);
         return;
       }
+
+      const blockNumber = records[0].chainBlockNumber;
+      const logs = records.map(recordToLog);
+      benchmark("map records to logs");
 
       // Chunk the logs array into chunks, so client can process valid JSON early
       const chunkSize = 1000;
