@@ -5,6 +5,7 @@ const includeClauseSchema = z.array(
   z.object({
     tableName: z.string(),
     tableType: z.enum(["offchainTable", "table"]).default("table"),
+    on: z.string().default("__key_bytes"),
   })
 );
 
