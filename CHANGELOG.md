@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.3.2...v0.4.0) (2024-01-23)
+
+
+### Features
+
+* add on condition in include clause ([fd4015e](https://github.com/primodiumxyz/mud-state-tools/commit/fd4015e2b5add9b62d9aba65f4eb3f76f82156a1))
+
+
+
+
+
 ## [0.3.2](https://github.com/primodiumxyz/mud-state-tools/compare/v0.3.1...v0.3.2) (2024-01-19)
 
 
