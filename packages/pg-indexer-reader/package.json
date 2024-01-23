@@ -1,6 +1,6 @@
 {
   "name": "@primodiumxyz/pg-indexer-reader",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "Minimal Typescript indexer for Store",
   "repository": {
     "type": "git",

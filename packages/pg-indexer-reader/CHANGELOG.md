@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.2...v0.4.3) (2024-01-23)
+
+
+### Bug Fixes
+
+* include now works with mult queries ([bee93a4](https://github.com/primodiumxyz/mud-state-tools/commit/bee93a4eeb198eac71b56c9be822b0f0dc929ca2))
+
+
+
+
+
 ## [0.4.1](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.0...v0.4.1) (2024-01-23)
 
 
