@@ -1,13 +1,11 @@
 import { z } from "zod";
 import { filterSchema } from "./utils/schema";
 import { querySchema, dbQuerySchema } from "../../pg-indexer-reader/src/postgres/querySchema";
-import { Address, Hex, Log, PublicClient } from "viem";
-import { StoreEventsAbi, StoreEventsAbiItem } from "@latticexyz/store";
+import { Hex, Log, PublicClient } from "viem";
+import { StoreEventsAbi, StoreEventsAbiItem, Table } from "@latticexyz/store";
 import { FetchLogsOptions } from "@latticexyz/block-logs-stream";
 import { World } from "@latticexyz/recs";
-import { ResolvedStoreConfig, StoreConfig } from "@latticexyz/store";
 import { UnionPick } from "@latticexyz/common/type-utils";
-import { KeySchema, ValueSchema } from "@latticexyz/protocol-parser";
 
 export type Query = z.infer<typeof querySchema>;
 
@@ -51,7 +49,7 @@ export type Writer = (log: StorageAdapterLog) => void;
 
 export type WriterRecsParams = {
   world: World;
-  tables: ResolvedStoreConfig<StoreConfig>["tables"];
+  tables: Record<string, Table>;
 };
 
 export type WriterAdapterFunctions = {
@@ -77,14 +75,6 @@ export type Sync = {
 
 export type TableNamespace = string;
 export type TableName = string;
-export type Table = {
-  address: Address;
-  tableId: Hex;
-  namespace: TableNamespace;
-  name: TableName;
-  keySchema: KeySchema;
-  valueSchema: ValueSchema;
-};
 
 export type StoreEventsLog = Log<bigint, number, false, StoreEventsAbiItem, true, StoreEventsAbi>;
 export type BlockLogs = { blockNumber: StoreEventsLog["blockNumber"]; logs: readonly StoreEventsLog[] };
