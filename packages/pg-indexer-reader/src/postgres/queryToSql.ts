@@ -1,7 +1,8 @@
 import { Sql, PendingQuery, Row } from "postgres";
-import { Query, Record, convertIfHexOtherwiseReturnString, tableNameToId } from "../util/common";
+import { Query, Record, convertIfHexOtherwiseReturnString } from "../util/common";
 import { snakeCase } from "change-case";
 import { isNotNull } from "@latticexyz/common/utils";
+import { hexToResource } from "@latticexyz/common";
 
 // Function to convert a single condition into SQL
 function _where(
@@ -90,9 +91,9 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
   const noConditionTableIDs: string[] = [];
 
   const queries = query
-    .map(({ tableName, where, and, or, include, tableType, namespace }) => {
-      const dbTableName = snakeCase(tableName);
-      const tableId = tableNameToId(tableName, tableType);
+    .map(({ tableId, where, and, or, include }) => {
+      const { name, namespace } = hexToResource(tableId);
+      const dbTableName = snakeCase(name);
       const schema = `${address}__${namespace}`;
 
       if (!where && !and && !or && !include) {
@@ -121,16 +122,18 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
         ${whereClause ? sql`WHERE ${whereClause}` : sql``}`;
 
       if (include && include.length) {
-        const includeQueries = include.map(({ tableName, tableType, on }) => {
-          const joinTableName = snakeCase(tableName);
-          const joinTableId = tableNameToId(tableName, tableType);
+        const includeQueries = include.map(({ tableId: joinTableId, on }) => {
+          const { name, namespace } = hexToResource(joinTableId);
+          const joinSchema = `${address}__${namespace}`;
+          const joinTableName = snakeCase(name);
+
           return sql`
-            SELECT ${sql(schema)}.${sql(joinTableName)}.__key_bytes, ${convertIfHexOtherwiseReturnString(
+            SELECT ${sql(joinSchema)}.${sql(joinTableName)}.__key_bytes, ${convertIfHexOtherwiseReturnString(
             joinTableId
           )} as table_id
             FROM (${_query}) AS base
-            JOIN ${sql(schema)}.${sql(joinTableName)}
-            ON ${sql(schema)}.${sql(joinTableName)}.${sql(on)} = base.__key_bytes`;
+            JOIN ${sql(joinSchema)}.${sql(joinTableName)}
+            ON ${sql(joinSchema)}.${sql(joinTableName)}.${sql(on)} = base.__key_bytes`;
         });
 
         _query = _union(sql, [_query, ...includeQueries]);

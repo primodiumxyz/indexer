@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
 import { ReaderQueryDecodedIndexerParams, Reader, StorageAdapterBlock } from "../../types";
 import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
-import { dbQuerySchema } from "../../utils/schema";
+import { dbQuerySchema } from "../../../../pg-indexer-reader/src/postgres/querySchema";
 
 export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
   const { indexerUrl, query } = params;
