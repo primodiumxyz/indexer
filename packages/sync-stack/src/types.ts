@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { filterSchema } from "./utils/schema";
-import { querySchema, dbQuerySchema } from "../../pg-indexer-reader/src/postgres/querySchema";
+import { querySchema, dbQuerySchema, filterSchema } from "../../pg-indexer-reader/src/postgres/querySchema";
 import { Hex, Log, PublicClient } from "viem";
 import { StoreEventsAbi, StoreEventsAbiItem, Table } from "@latticexyz/store";
 import { FetchLogsOptions } from "@latticexyz/block-logs-stream";
