@@ -16,8 +16,7 @@ export const filterSchema = z.object({
 
 const includeClauseSchema = z.array(
   z.object({
-    tableName: z.string(),
-    tableType: z.enum(["offchainTable", "table"]).default("table"),
+    tableId: z.string().refine(isHex),
     on: z.string().default("__key_bytes"),
   })
 );
@@ -30,9 +29,7 @@ const whereClauseSchema = z.object({
 
 export const querySchema = z
   .object({
-    tableName: z.string(),
-    namespace: z.string().default(""),
-    tableType: z.enum(["offchainTable", "table"]).default("table"),
+    tableId: z.string().refine(isHex),
     where: whereClauseSchema.optional(),
     and: whereClauseSchema.array().optional(),
     or: whereClauseSchema.array().optional(),

@@ -1,7 +1,6 @@
 import { Hex } from "viem";
 import { z } from "zod";
 import { dbQuerySchema, querySchema } from "../postgres/querySchema";
-import { resourceToHex } from "@latticexyz/common";
 
 export type RecordData = {
   address: Hex;
@@ -34,12 +33,4 @@ export function convertIfHexOtherwiseReturnString(inputString: string | Hex) {
     return Buffer.from(inputString.slice(2), "hex");
   }
   return inputString;
-}
-
-export function tableNameToId(tableName: string, tableType: Query["tableType"]): Hex {
-  return resourceToHex({
-    name: tableName,
-    type: tableType,
-    namespace: "",
-  });
 }
