@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.3...v0.5.0) (2024-01-25)
+
+
+### Features
+
+* query decoded indexer with table id instead ([8a8719d](https://github.com/primodiumxyz/mud-state-tools/commit/8a8719d18dd17d2a9064829827e1cde010a024ac))
+
+
+
+
+
 ## [0.4.3](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.2...v0.4.3) (2024-01-23)
 
 

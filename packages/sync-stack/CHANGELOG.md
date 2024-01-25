@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.3...v0.5.0) (2024-01-25)
+
+
+### Bug Fixes
+
+* tables type in `WriterRecsParams` ([2610f97](https://github.com/primodiumxyz/mud-state-tools/commit/2610f97032a5fa3745c86a5f28996aca7c5912f0))
+
+
+### Features
+
+* query decoded indexer with table id instead ([8a8719d](https://github.com/primodiumxyz/mud-state-tools/commit/8a8719d18dd17d2a9064829827e1cde010a024ac))
+
+
+
+
+
 ## [0.4.2](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.1...v0.4.2) (2024-01-23)
 
 
