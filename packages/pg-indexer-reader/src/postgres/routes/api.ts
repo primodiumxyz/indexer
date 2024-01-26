@@ -34,11 +34,14 @@ export function api(database: Sql): Middleware {
       benchmark("query records");
 
       if (records.length === 0) {
-        ctx.status = 404;
-        ctx.body = JSON.stringify({
-          message: "no logs found",
-        });
-        error(`no logs found for, address ${options.address}, filters ${JSON.stringify(options.filters)}`);
+        ctx.status = 200;
+        ctx.body =
+          JSON.stringify({
+            blockNumber: 0,
+            chunk: 1,
+            totalChunks: 1,
+            logs: [],
+          }) + "\n";
         return;
       }
 
@@ -89,12 +92,17 @@ export function api(database: Sql): Middleware {
       benchmark("query records");
 
       if (records.length === 0) {
-        ctx.status = 404;
-        ctx.body = JSON.stringify({
-          message: "no logs found",
-        });
-        error(`no logs found for ${input.queries}`);
-        return;
+        if (records.length === 0) {
+          ctx.status = 200;
+          ctx.body =
+            JSON.stringify({
+              blockNumber: 0,
+              chunk: 1,
+              totalChunks: 1,
+              logs: [],
+            }) + "\n";
+          return;
+        }
       }
 
       const blockNumber = records[0].chainBlockNumber;
