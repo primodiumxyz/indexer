@@ -1,4 +1,4 @@
-# Primodium: MUD State Tools
+# Primodium Indexer
 
 Set of tools for reading data in MUD compliant projects.
 
