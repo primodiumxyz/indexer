@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.5.1...v0.6.0) (2024-03-02)
+
+
+### Features
+
+* use events emitter 3 for browser ([4e5b04d](https://github.com/primodiumxyz/mud-state-tools/commit/4e5b04d0b74ef7eac82ca3b20f0196ef8dd2a733))
+
+
+
+
+
 # [0.5.0](https://github.com/primodiumxyz/mud-state-tools/compare/v0.4.3...v0.5.0) (2024-01-25)
 
 
