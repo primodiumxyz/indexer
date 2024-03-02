@@ -1,4 +1,4 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from "eventemitter3";
 import { ReaderFilterIndexerParams, Reader, StorageAdapterBlock } from "../../types";
 import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 

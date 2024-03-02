@@ -1,4 +1,4 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from "eventemitter3";
 import { fetchLogs } from "@latticexyz/block-logs-stream";
 import { storeEventsAbi } from "@latticexyz/store";
 import { ReaderFilterRpcParams, Reader } from "../../types";

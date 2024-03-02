@@ -144,6 +144,9 @@ importers:
       debug:
         specifier: ^4.3.4
         version: 4.3.4
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
       viem:
         specifier: 1.14.0
         version: 1.14.0(typescript@5.1.6)(zod@3.22.4)

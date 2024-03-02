@@ -1,4 +1,4 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from "eventemitter3";
 import { ReaderQueryDecodedIndexerParams, Reader, StorageAdapterBlock } from "../../types";
 import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 import { dbQuerySchema } from "../../../../pg-indexer-reader/src/postgres/querySchema";

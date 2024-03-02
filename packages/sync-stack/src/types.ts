@@ -49,6 +49,7 @@ export type Writer = (log: StorageAdapterLog) => void;
 export type WriterRecsParams = {
   world: World;
   tables: Record<string, Table>;
+  overwrite?: boolean;
 };
 
 export type WriterAdapterFunctions = {
