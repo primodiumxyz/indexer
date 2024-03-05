@@ -1,4 +1,4 @@
-import { createWriter } from "./createrWriter";
+import { createWriter } from "./createWriter";
 
 export const consoleWriter = createWriter({
   delete(log) {

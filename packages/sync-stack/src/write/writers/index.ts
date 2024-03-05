@@ -1,3 +1,3 @@
 export * from "./consoleWriter";
-export * from "./createrWriter";
+export * from "./createWriter";
 export * from "./recsWriter";
