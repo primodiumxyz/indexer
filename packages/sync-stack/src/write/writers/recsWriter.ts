@@ -3,7 +3,7 @@ import { hexToResource, spliceHex } from "@latticexyz/common";
 import { getComponentValue, removeComponent, setComponent } from "@latticexyz/recs";
 import { Hex, size } from "viem";
 
-import { createWriter } from "./createrWriter";
+import { createWriter } from "./createWriter";
 import { debug } from "../../utils/debug";
 import { flattenSchema, hexKeyTupleToEntity } from "../../utils/recs";
 import { StorageAdapterLog, WriterRecsParams } from "../../types";
@@ -46,6 +46,7 @@ export const recsWriter = ({ world, tables }: WriterRecsParams) => {
         entity,
         value,
       });
+
       setComponent(component, entity, {
         ...value,
         __staticData: log.args.staticData,

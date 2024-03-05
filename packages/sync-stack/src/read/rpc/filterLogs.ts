@@ -19,6 +19,7 @@ export function filterLogs(args: ReaderFilterRpcParams): Reader {
           for await (const { logs, toBlock } of fetchLogs({
             events: storeEventsAbi,
             fromBlock: args.fromBlock,
+            address: args.address,
             toBlock: args.toBlock,
             publicClient: args.publicClient,
             maxBlockRange: args.maxBlockRange,
