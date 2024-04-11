@@ -1,10 +1,12 @@
 import { z } from "zod";
 import { querySchema, dbQuerySchema, filterSchema } from "../../pg-indexer-reader/src/postgres/querySchema";
 import { Hex, Log, PublicClient } from "viem";
-import { StoreEventsAbi, StoreEventsAbiItem, Table } from "@latticexyz/store";
+import { StoreEventsAbi, StoreEventsAbiItem } from "@latticexyz/store";
+
 import { FetchLogsOptions } from "@latticexyz/block-logs-stream";
 import { World } from "@latticexyz/recs";
 import { UnionPick } from "@latticexyz/common/type-utils";
+import { Table } from "@latticexyz/store/internal";
 
 export type Query = z.infer<typeof querySchema>;
 

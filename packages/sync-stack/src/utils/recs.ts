@@ -1,9 +1,9 @@
 import { Entity } from "@latticexyz/recs";
-import { KeySchema, SchemaToPrimitives } from "@latticexyz/protocol-parser";
+import { KeySchema, SchemaToPrimitives } from "@latticexyz/protocol-parser/internal";
 import { mapObject } from "@latticexyz/common/utils";
-import { ValueSchema } from "@latticexyz/store";
+import { ValueSchema } from "@latticexyz/store/internal";
 import { stringToHex, encodeAbiParameters, Hex, concatHex } from "viem";
-import { Table } from "../types";
+import { Table } from "@latticexyz/store-sync";
 
 export function hexKeyTupleToEntity(hexKeyTuple: readonly Hex[]): Entity {
   return concatHex(hexKeyTuple as Hex[]) as Entity;
