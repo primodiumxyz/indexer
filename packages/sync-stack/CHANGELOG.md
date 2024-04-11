@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/primodiumxyz/mud-state-tools/compare/v0.6.1...v0.6.2) (2024-04-11)
+
+
+### Bug Fixes
+
+* remove comment ([919adf6](https://github.com/primodiumxyz/mud-state-tools/commit/919adf6312746ae594720c8d66e123e3f8f5e0f5))
+
+
+
+
+
 ## [0.6.1](https://github.com/primodiumxyz/mud-state-tools/compare/v0.6.0...v0.6.1) (2024-03-05)
 
 
