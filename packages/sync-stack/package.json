@@ -32,7 +32,6 @@
     "@latticexyz/recs": "2.0.1",
     "@latticexyz/schema-type": "2.0.1",
     "@latticexyz/store": "2.0.1",
-    "@latticexyz/store-sync": "2.0.1",
     "debug": "^4.3.4",
     "eventemitter3": "^5.0.1",
     "viem": "2.7.12",

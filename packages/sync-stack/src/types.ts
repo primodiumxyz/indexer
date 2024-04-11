@@ -1,12 +1,12 @@
 import { z } from "zod";
 import { querySchema, dbQuerySchema, filterSchema } from "../../pg-indexer-reader/src/postgres/querySchema";
-import { Hex, Log, PublicClient } from "viem";
+import { Address, Hex, Log, PublicClient } from "viem";
 import { StoreEventsAbi, StoreEventsAbiItem } from "@latticexyz/store";
+import type { KeySchema, Table, ValueSchema } from "@latticexyz/store/internal";
 
 import { FetchLogsOptions } from "@latticexyz/block-logs-stream";
 import { World } from "@latticexyz/recs";
 import { UnionPick } from "@latticexyz/common/type-utils";
-import { Table } from "@latticexyz/store/internal";
 
 export type Query = z.infer<typeof querySchema>;
 
@@ -66,7 +66,7 @@ export type SyncOptions = {
   writer: Writer | Writer[];
 };
 
-export type Sync = {
+export type SyncFunctions = {
   start: (
     onProgress?: (index: number, blockNumber: bigint, progress: number) => void,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -82,3 +82,12 @@ export type StoreEventsLog = Log<bigint, number, false, StoreEventsAbiItem, true
 export type BlockLogs = { blockNumber: StoreEventsLog["blockNumber"]; logs: readonly StoreEventsLog[] };
 export type StorageAdapterLog = Partial<StoreEventsLog> & UnionPick<StoreEventsLog, "address" | "eventName" | "args">;
 export type StorageAdapterBlock = { blockNumber: BlockLogs["blockNumber"]; logs: readonly StorageAdapterLog[] };
+
+export type StoreTable = {
+  address: Address;
+  tableId: Hex;
+  namespace: TableNamespace;
+  name: TableName;
+  keySchema: KeySchema;
+  valueSchema: ValueSchema;
+};

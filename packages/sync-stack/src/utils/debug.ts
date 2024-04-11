@@ -1,7 +1,7 @@
-import createDebug from "debug";
+import { debug as parentDebug } from "debug";
 
-export const debug = createDebug("primodium:sync-stack");
-export const error = createDebug("primodium:sync-stack");
+export const debug = parentDebug("primodium:sync-stack");
+export const error = parentDebug("primodium:sync-stack");
 
 // Pipe debug output to stdout instead of stderr
 debug.log = console.debug.bind(console);
