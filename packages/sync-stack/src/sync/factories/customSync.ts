@@ -1,10 +1,10 @@
-import { Reader, Sync, SyncOptions } from "../../types";
+import { Reader, SyncFunctions, SyncOptions } from "../../types";
 
-export function createSync(options: SyncOptions): Sync {
+export function createSync(options: SyncOptions): SyncFunctions {
   const { reader, writer } = options;
   const unsubscribe: (() => void)[] = [];
 
-  const sync: Sync = {
+  const sync: SyncFunctions = {
     start: (onProgress, error) => {
       function subToReader(reader: Reader, index: number) {
         onProgress && onProgress(index, 0n, 0);

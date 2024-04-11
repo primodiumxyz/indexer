@@ -1,6 +1,6 @@
-import { decodeValueArgs } from "@latticexyz/protocol-parser";
 import { hexToResource, spliceHex } from "@latticexyz/common";
 import { getComponentValue, removeComponent, setComponent } from "@latticexyz/recs";
+import { decodeValueArgs } from "@latticexyz/protocol-parser/internal";
 import { Hex, size } from "viem";
 
 import { createWriter } from "./createWriter";

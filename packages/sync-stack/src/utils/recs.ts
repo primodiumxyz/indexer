@@ -1,9 +1,9 @@
 import { Entity } from "@latticexyz/recs";
-import { KeySchema, SchemaToPrimitives } from "@latticexyz/protocol-parser";
+import { KeySchema, SchemaToPrimitives } from "@latticexyz/protocol-parser/internal";
 import { mapObject } from "@latticexyz/common/utils";
-import { ValueSchema } from "@latticexyz/store";
+import { ValueSchema } from "@latticexyz/store/internal";
 import { stringToHex, encodeAbiParameters, Hex, concatHex } from "viem";
-import { Table } from "../types";
+import { StoreTable } from "../types";
 
 export function hexKeyTupleToEntity(hexKeyTuple: readonly Hex[]): Entity {
   return concatHex(hexKeyTuple as Hex[]) as Entity;
@@ -23,7 +23,7 @@ export function encodeEntity<TKeySchema extends KeySchema>(
   );
 }
 
-export function getTableEntity(table: Pick<Table, "address" | "namespace" | "name">): Entity {
+export function getTableEntity(table: Pick<StoreTable, "address" | "namespace" | "name">): Entity {
   return encodeEntity(
     { address: "address", namespace: "bytes16", name: "bytes16" },
     {
