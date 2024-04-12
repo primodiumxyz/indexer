@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3](https://github.com/primodiumxyz/indexer/compare/v0.6.2...v0.6.3) (2024-04-12)
+
+
+### Bug Fixes
+
+* update debug imports for build ([ea83fd4](https://github.com/primodiumxyz/indexer/commit/ea83fd40ca09d6b519722928b3589e76d08bbd81))
+
+
+
+
+
 ## [0.6.2](https://github.com/primodiumxyz/indexer/compare/v0.6.1...v0.6.2) (2024-04-11)
 
 
