@@ -26,12 +26,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@latticexyz/block-logs-stream": "2.0.1",
-    "@latticexyz/common": "2.0.1",
-    "@latticexyz/protocol-parser": "2.0.1",
-    "@latticexyz/recs": "2.0.1",
-    "@latticexyz/schema-type": "2.0.1",
-    "@latticexyz/store": "2.0.1",
+    "@latticexyz/block-logs-stream": "2.0.6",
+    "@latticexyz/common": "2.0.6",
+    "@latticexyz/protocol-parser": "2.0.6",
+    "@latticexyz/recs": "2.0.6",
+    "@latticexyz/schema-type": "2.0.6",
+    "@latticexyz/store": "2.0.6",
     "debug": "^4.3.4",
     "eventemitter3": "^5.0.1",
     "viem": "2.7.12",
