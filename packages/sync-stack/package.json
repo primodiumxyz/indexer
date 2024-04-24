@@ -34,7 +34,7 @@
     "@latticexyz/store": "2.0.6",
     "debug": "^4.3.4",
     "eventemitter3": "^5.0.1",
-    "viem": "2.7.12",
+    "viem": "2.9.20",
     "zod": "^3.22.4"
   },
   "devDependencies": {
