@@ -1,4 +1,4 @@
-import { isHex } from "viem";
+import { Hex, isHex } from "viem";
 import { z, ZodError, ZodTypeAny } from "zod";
 
 export const frontendEnvSchema = z.object({
@@ -7,12 +7,20 @@ export const frontendEnvSchema = z.object({
   GRAPHQL: z.boolean().default(true),
 });
 
+const isHexOrUndefined = (input: unknown): input is Hex | undefined => {
+  return input === undefined || isHex(input);
+};
+
 export const indexerEnvSchema = z.intersection(
   z.object({
     START_BLOCK: z.coerce.bigint().nonnegative().default(0n),
     MAX_BLOCK_RANGE: z.coerce.bigint().positive().default(1000n),
     POLLING_INTERVAL: z.coerce.number().positive().default(1000),
-    STORE_ADDRESS: z.string().refine(isHex).optional(),
+    STORE_ADDRESS: z
+      .string()
+      .optional()
+      .transform((input) => (input === "" ? undefined : input))
+      .refine(isHexOrUndefined),
   }),
   z.union([
     z.object({
@@ -23,22 +31,16 @@ export const indexerEnvSchema = z.intersection(
       RPC_HTTP_URL: z.string().optional(),
       RPC_WS_URL: z.string(),
     }),
-  ])
+  ]),
 );
 
-export function parseEnv<TSchema extends ZodTypeAny>(
-  envSchema: TSchema
-): z.infer<TSchema> {
+export function parseEnv<TSchema extends ZodTypeAny>(envSchema: TSchema): z.infer<TSchema> {
   try {
     return envSchema.parse(process.env);
   } catch (error) {
     if (error instanceof ZodError) {
       const { _errors, ...invalidEnvVars } = error.format();
-      console.error(
-        `\nMissing or invalid environment variables:\n\n  ${Object.keys(
-          invalidEnvVars
-        ).join("\n  ")}\n`
-      );
+      console.error(`\nMissing or invalid environment variables:\n\n  ${Object.keys(invalidEnvVars).join("\n  ")}\n`);
       process.exit(1);
     }
     throw error;

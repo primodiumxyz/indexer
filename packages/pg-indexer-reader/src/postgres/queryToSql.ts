@@ -9,7 +9,7 @@ function _where(
   sql: Sql,
   schemaName: string,
   dbTableName: string,
-  where: NonNullable<Query["where"]>
+  where: NonNullable<Query["where"]>,
 ): PendingQuery<Row[]> {
   const _condition = sql`${sql(schemaName)}.${sql(dbTableName)}.${sql(where.column)}`;
   const _value = convertIfHexOtherwiseReturnString(where.value);
@@ -79,10 +79,10 @@ function getRecordsForTableIDs(sql: Sql, address: string, tableIDs: string[]) {
         log_index AS "logIndex"
       FROM mud.records
       WHERE mud.records.address = ${convertIfHexOtherwiseReturnString(
-        address
+        address,
       )} AND mud.records.is_deleted = false AND mud.records.table_id IN ${sql(
-    tableIDs.map((id) => convertIfHexOtherwiseReturnString(id))
-  )}
+        tableIDs.map((id) => convertIfHexOtherwiseReturnString(id)),
+      )}
   `;
 }
 
@@ -93,8 +93,8 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
   const queries = query
     .map(({ tableId, where, and, or, include }) => {
       const { name, namespace } = hexToResource(tableId);
-      const dbTableName = snakeCase(name);
-      const schema = `${address}__${namespace}`;
+      const dbTableName = `${snakeCase(namespace)}__${snakeCase(name)}`;
+      const schema = address;
 
       if (!where && !and && !or && !include) {
         noConditionTableIDs.push(tableId);
@@ -107,12 +107,12 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
       } else if (and) {
         whereClause = _and(
           sql,
-          and.map((where) => _where(sql, schema, dbTableName, where))
+          and.map((where) => _where(sql, schema, dbTableName, where)),
         );
       } else if (or) {
         whereClause = _or(
           sql,
-          or.map((where) => _where(sql, schema, dbTableName, where))
+          or.map((where) => _where(sql, schema, dbTableName, where)),
         );
       }
 
@@ -124,13 +124,13 @@ export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<R
       if (include && include.length) {
         const includeQueries = include.map(({ tableId: joinTableId, on }) => {
           const { name, namespace } = hexToResource(joinTableId);
-          const joinSchema = `${address}__${namespace}`;
-          const joinTableName = snakeCase(name);
+          const joinSchema = address;
+          const joinTableName = `${snakeCase(namespace)}__${snakeCase(name)}`;
 
           return sql`
             SELECT ${sql(joinSchema)}.${sql(joinTableName)}.__key_bytes, ${convertIfHexOtherwiseReturnString(
-            joinTableId
-          )} as table_id
+              joinTableId,
+            )} as table_id
             FROM (${_query}) AS base
             JOIN ${sql(joinSchema)}.${sql(joinTableName)}
             ON ${sql(joinSchema)}.${sql(joinTableName)}.${sql(on)} = base.__key_bytes`;

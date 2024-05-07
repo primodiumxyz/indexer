@@ -16,7 +16,7 @@ services:
       - /var/lib/postgresql/data
 
   primodium-postgres-index-write:
-    image: ghcr.io/latticexyz/store-indexer:sha-735d957
+    image: ghcr.io/latticexyz/store-indexer:sha-338c8e5
     restart: always
     platform: linux/amd64
     networks:
