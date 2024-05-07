@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.6](https://github.com/primodiumxyz/indexer/compare/v0.6.5...v0.6.6) (2024-05-07)
+
+
+### Bug Fixes
+
+* obsolete table name + schema format ([bd1c393](https://github.com/primodiumxyz/indexer/commit/bd1c393d3ddc54bdc72064d374b64ca919d34d26))
+
+
+
+
+
 ## [0.6.5](https://github.com/primodiumxyz/indexer/compare/v0.6.4...v0.6.5) (2024-04-24)
 
 **Note:** Version bump only for package @primodiumxyz/mud-state-tools
