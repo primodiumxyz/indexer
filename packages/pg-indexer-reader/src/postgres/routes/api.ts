@@ -23,6 +23,7 @@ export function api(database: Sql): Middleware {
     } catch (e) {
       ctx.status = 400;
       ctx.body = JSON.stringify(e);
+      ctx.set("Content-Type", "application/json");
       debug(e);
       return;
     }
@@ -66,7 +67,7 @@ export function api(database: Sql): Middleware {
                 chunk: index + 1,
                 totalChunks: chunks.length,
                 logs: chunk,
-              }) + "\n"
+              }) + "\n",
             );
           });
 
@@ -78,6 +79,7 @@ export function api(database: Sql): Middleware {
       ctx.status = 200;
     } catch (e) {
       ctx.status = 500;
+      ctx.set("Content-Type", "application/json");
       ctx.body = JSON.stringify(e);
       error(e);
     }
@@ -127,7 +129,7 @@ export function api(database: Sql): Middleware {
                 chunk: index + 1,
                 totalChunks: chunks.length,
                 logs: chunk,
-              }) + "\n"
+              }) + "\n",
             );
           });
 
