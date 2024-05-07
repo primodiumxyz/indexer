@@ -2,7 +2,6 @@ import { isNotNull } from "@latticexyz/common/utils";
 import { PendingQuery, Row, Sql } from "postgres";
 import { hexToBytes } from "viem";
 import { z } from "zod";
-import { input } from "@latticexyz/store-sync/indexer-client";
 import { transformSchemaName } from "@latticexyz/store-sync/postgres";
 import { Record } from "../util/common";
 import { filterSchema } from "./querySchema";
