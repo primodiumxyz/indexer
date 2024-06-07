@@ -1,15 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es2021",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
+    "target": "es2021",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "resolveJsonModule": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
