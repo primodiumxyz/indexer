@@ -11,10 +11,10 @@
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
-    "./types": "./dist/types.ts"
+    "./types": "./dist/types.js"
   },
   "main": "./dist/index.js",
-  "types": "./dist/types.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
