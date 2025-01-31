@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.10](https://github.com/primodiumxyz/mud-state-tools/compare/v0.6.9...v0.6.10) (2025-01-31)
+
+
+### Bug Fixes
+
+* cleaup docker-compose ([527d013](https://github.com/primodiumxyz/mud-state-tools/commit/527d0130cb939cb97cc3743bc498399b9be482b5))
+* remove "primodium" ([ed07133](https://github.com/primodiumxyz/mud-state-tools/commit/ed07133e716836a35bfcc45cec3fbe9dd43ed051))
+
+
+
+
+
 ## [0.6.9](https://github.com/primodiumxyz/mud-state-tools/compare/v0.6.8...v0.6.9) (2024-06-07)
 
 **Note:** Version bump only for package @primodiumxyz/pg-indexer-reader
