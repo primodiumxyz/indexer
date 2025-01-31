@@ -15,8 +15,8 @@
     "package.json": "pnpm sort-package-json"
   },
   "engines": {
-    "node": "20.x",
-    "pnpm": "9.x"
+    "node": "18.x",
+    "pnpm": "8.x"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.3.0",
