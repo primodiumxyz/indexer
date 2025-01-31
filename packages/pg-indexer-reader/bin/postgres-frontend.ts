@@ -14,8 +14,8 @@ const env = parseEnv(
     frontendEnvSchema,
     z.object({
       DATABASE_URL: z.string(),
-    })
-  )
+    }),
+  ),
 );
 
 const database = postgres(env.DATABASE_URL, { prepare: false });
@@ -46,7 +46,5 @@ router.get("/readyz", (ctx) => {
 server.use(router.routes());
 server.use(router.allowedMethods());
 
-server.listen({ host: env.HOST, port: env.PORT });
-console.log(
-  `postgres indexer frontend listening on http://${env.HOST}:${env.PORT}`
-);
+server.listen({ host: env.INDEXER_HOST, port: env.INDEXER_PORT });
+console.log(`postgres indexer frontend listening on http://${env.INDEXER_HOST}:${env.INDEXER_PORT}`);

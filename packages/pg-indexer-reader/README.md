@@ -3,9 +3,21 @@
 ## Getting Started
 
 ### Requirements
+
 - Node 14+
 - Docker
 - pnpm
+
+### Environment
+
+If you would like to change the default host and port the indexer will run on, create a `.env` file in the root of your project with the following variables:
+
+```bash
+INDEXER_HOST=0.0.0.0
+INDEXER_PORT=3001
+```
+
+### Running the indexer
 
 To start a local indexer on foundry chain run:
 

@@ -2,9 +2,8 @@ import { Hex, isHex } from "viem";
 import { z, ZodError, ZodTypeAny } from "zod";
 
 export const frontendEnvSchema = z.object({
-  HOST: z.string().default("0.0.0.0"),
-  PORT: z.coerce.number().positive().default(3001),
-  GRAPHQL: z.boolean().default(true),
+  INDEXER_HOST: z.string().default("0.0.0.0"),
+  INDEXER_PORT: z.coerce.number().positive().default(3001),
 });
 
 const isHexOrUndefined = (input: unknown): input is Hex | undefined => {
