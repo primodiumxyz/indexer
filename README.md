@@ -1,4 +1,4 @@
-# Primodium Indexer
+# MUD Indexer
 
 Set of tools for reading data in MUD compliant projects.
 

@@ -24,7 +24,7 @@ services:
     environment:
       RPC_HTTP_URL: http://host.docker.internal:8545
       DEBUG: "mud:*"
-      DATABASE_URL: postgres://user:password@primodium-postgres/postgres
+      DATABASE_URL: postgres://user:password@postgres/postgres
     command: pnpm tsx bin/postgres-decoded-indexer
 
   postgres-query-read:
@@ -38,7 +38,7 @@ services:
     environment:
       RPC_HTTP_URL: http://host.docker.internal:8545
       DEBUG: "mud:*"
-      DATABASE_URL: postgres://user:password@primodium-postgres/postgres
+      DATABASE_URL: postgres://user:password@postgres/postgres
     ports:
       - "3001:3001"
     command: pnpm start
