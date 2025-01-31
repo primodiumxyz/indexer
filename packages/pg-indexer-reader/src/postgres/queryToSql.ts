@@ -4,7 +4,15 @@ import { snakeCase } from "change-case";
 import { isNotNull } from "@latticexyz/common/utils";
 import { hexToResource } from "@latticexyz/common";
 
-// Function to convert a single condition into SQL
+/**
+ * Function to convert a single condition into SQL.
+ *
+ * @param sql - The SQL connection
+ * @param schemaName - The name of the schema
+ * @param dbTableName - The name of the table
+ * @param where - The where clause
+ * @returns The SQL query
+ */
 function _where(
   sql: Sql,
   schemaName: string,
@@ -32,20 +40,47 @@ function _where(
   }
 }
 
-// Function to combine conditions with AND logic
+/**
+ * Function to combine conditions with AND logic.
+ *
+ * @param sql - The SQL connection
+ * @param conditions - The conditions to AND
+ * @returns The AND condition
+ */
 function _and(sql: Sql, conditions: PendingQuery<Row[]>[]): PendingQuery<Row[]> {
   return sql`(${conditions.reduce((query, condition) => sql`${query} AND ${condition}`)})`;
 }
 
-// Function to combine conditions with OR logic
+/**
+ * Function to combine conditions with OR logic.
+ *
+ * @param sql - The SQL connection
+ * @param conditions - The conditions to OR
+ * @returns The OR condition
+ */
 function _or(sql: Sql, conditions: PendingQuery<Row[]>[]): PendingQuery<Row[]> {
   return sql`(${conditions.reduce((query, condition) => sql`${query} OR ${condition}`)})`;
 }
 
+/**
+ * Function to combine queries with UNION ALL logic.
+ *
+ * @param sql - The SQL connection
+ * @param queries - The queries to UNION ALL
+ * @returns The UNION ALL query
+ */
 function _union(sql: Sql, queries: PendingQuery<Row[]>[]) {
   return queries.reduce((acc, query) => sql`${acc} UNION ALL ${query}`);
 }
 
+/**
+ * Function to query filtered records from the database.
+ *
+ * @param sql - The SQL connection
+ * @param query - The query to filter
+ * @param address - The address of the world contract
+ * @returns The filtered records
+ */
 function filterRecords(sql: Sql, query: PendingQuery<Row[]>, address: string) {
   return sql`
     WITH filter as (
@@ -86,7 +121,14 @@ function getRecordsForTableIDs(sql: Sql, address: string, tableIDs: string[]) {
   `;
 }
 
-// Function to convert a query object into an SQL query
+/**
+ * Function to convert a query object into an SQL query.
+ *
+ * @param sql - The SQL connection
+ * @param address - The address of the world contract
+ * @param query - The query to convert
+ * @returns The SQL query
+ */
 export function toSQL(sql: Sql, address: string, query: Query[]): PendingQuery<Record[]> {
   const noConditionTableIDs: string[] = [];
 

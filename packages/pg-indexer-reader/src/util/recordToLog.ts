@@ -2,6 +2,12 @@ import { StorageAdapterLog } from "@latticexyz/store-sync";
 import { decodeDynamicField } from "@latticexyz/protocol-parser/internal";
 import { RecordData } from "./common";
 
+/**
+ * Convert a database record to a MUD typed log.
+ *
+ * @param record - The record to convert
+ * @returns The log
+ */
 export function recordToLog(
   record: Omit<RecordData, "recordBlockNumber">,
 ): StorageAdapterLog & { eventName: "Store_SetRecord" } {

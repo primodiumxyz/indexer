@@ -87,7 +87,7 @@ importers:
         specifier: 2.9.20
         version: 2.9.20(typescript@5.7.3)(zod@3.24.1)
       zod:
-        specifier: ^3.23.8
+        specifier: ^3.21.4
         version: 3.24.1
     devDependencies:
       '@types/accepts':

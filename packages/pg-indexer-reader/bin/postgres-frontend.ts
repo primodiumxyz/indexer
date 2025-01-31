@@ -7,7 +7,6 @@ import Router from "@koa/router";
 import postgres from "postgres";
 import { frontendEnvSchema, parseEnv } from "./parseEnv";
 import { api } from "../src/postgres/routes/api";
-// import { registerSentryMiddlewares } from "../src/sentry";
 
 const env = parseEnv(
   z.intersection(
@@ -21,10 +20,6 @@ const env = parseEnv(
 const database = postgres(env.DATABASE_URL, { prepare: false });
 
 const server = new Koa();
-
-// if (process.env.SENTRY_DSN) {
-//   registerSentryMiddlewares(server);
-// }
 
 server.use(cors());
 server.use(api(database));

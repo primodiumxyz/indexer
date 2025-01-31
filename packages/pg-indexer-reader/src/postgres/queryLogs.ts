@@ -8,46 +8,55 @@ import { filterSchema } from "./querySchema";
 
 const schemaName = transformSchemaName("mud");
 
+/**
+ * AND condition for SQL queries.
+ *
+ * @param sql - The SQL connection
+ * @param conditions - The conditions to AND
+ * @returns The AND condition
+ */
 function and(sql: Sql, conditions: PendingQuery<Row[]>[]): PendingQuery<Row[]> {
-  return sql`(${conditions.reduce(
-    (query, condition) => sql`${query} AND ${condition}`
-  )})`;
+  return sql`(${conditions.reduce((query, condition) => sql`${query} AND ${condition}`)})`;
 }
 
+/**
+ * OR condition for SQL queries.
+ *
+ * @param sql - The SQL connection
+ * @param conditions - The conditions to OR
+ * @returns The OR condition
+ */
 function or(sql: Sql, conditions: PendingQuery<Row[]>[]): PendingQuery<Row[]> {
-  return sql`(${conditions.reduce(
-    (query, condition) => sql`${query} OR ${condition}`
-  )})`;
+  return sql`(${conditions.reduce((query, condition) => sql`${query} OR ${condition}`)})`;
 }
 
-export function queryLogs(
-  sql: Sql,
-  opts: z.infer<typeof filterSchema>
-): PendingQuery<Record[]> {
+/**
+ * Query logs from the database.
+ *
+ * @param sql - The SQL connection
+ * @param opts - The options for the query
+ * @returns The query
+ */
+export function queryLogs(sql: Sql, opts: z.infer<typeof filterSchema>): PendingQuery<Record[]> {
   const conditions = opts.filters.length
     ? opts.filters.map((filter) =>
         and(
           sql,
           [
-            opts.address != null
-              ? sql`address = ${hexToBytes(opts.address)}`
-              : null,
+            opts.address != null ? sql`address = ${hexToBytes(opts.address)}` : null,
             sql`table_id = ${hexToBytes(filter.tableId)}`,
             filter.key0 != null ? sql`key0 = ${hexToBytes(filter.key0)}` : null,
             filter.key1 != null ? sql`key1 = ${hexToBytes(filter.key1)}` : null,
-          ].filter(isNotNull)
-        )
+          ].filter(isNotNull),
+        ),
       )
     : opts.address != null
-    ? [sql`address = ${hexToBytes(opts.address)}`]
-    : [];
+      ? [sql`address = ${hexToBytes(opts.address)}`]
+      : [];
 
   const where = sql`WHERE ${and(
     sql,
-    [
-      sql`is_deleted != true`,
-      conditions.length ? or(sql, conditions) : null,
-    ].filter(isNotNull)
+    [sql`is_deleted != true`, conditions.length ? or(sql, conditions) : null].filter(isNotNull),
   )}`;
 
   // TODO: implement bytea <> hex columns via custom types: https://github.com/porsager/postgres#custom-types

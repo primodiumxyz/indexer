@@ -11,6 +11,12 @@ import { dbQuerySchema, filterSchema } from "../querySchema";
 import { toSQL } from "../queryToSql";
 import { Readable } from "stream";
 
+/**
+ * API routes available to the frontend to read logs indexed to the database.
+ *
+ * @param database - The database connection
+ * @returns The Koa middleware
+ */
 export function api(database: Sql): Middleware {
   const router = new Router();
 
