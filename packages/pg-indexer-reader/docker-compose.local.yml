@@ -1,40 +1,40 @@
 version: "3.8"
 
 services:
-  primodium-postgres:
+  postgres:
     image: postgres:16.1
     restart: always
     platform: linux/amd64
     ports:
       - 5432:5432
     networks:
-      - primodium-indexer
+      - indexer-network
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     volumes:
       - /var/lib/postgresql/data
 
-  primodium-postgres-index-write:
+  postgres-index-write:
     image: ghcr.io/latticexyz/store-indexer:sha-338c8e5
     restart: always
     platform: linux/amd64
     networks:
-      - primodium-indexer
+      - indexer-network
     environment:
       RPC_HTTP_URL: http://host.docker.internal:8545
       DEBUG: "mud:*"
       DATABASE_URL: postgres://user:password@primodium-postgres/postgres
     command: pnpm tsx bin/postgres-decoded-indexer
 
-  primodium-postgres-query-read:
+  postgres-query-read:
     image: pg-indexer-reader
     build:
       context: .
     restart: always
     platform: linux/amd64
     networks:
-      - primodium-indexer
+      - indexer-network
     environment:
       RPC_HTTP_URL: http://host.docker.internal:8545
       DEBUG: "mud:*"
@@ -44,5 +44,5 @@ services:
     command: pnpm start
 
 networks:
-  primodium-indexer:
+  indexer-network:
     driver: bridge
