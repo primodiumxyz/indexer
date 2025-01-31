@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.12](https://github.com/primodiumxyz/indexer/compare/v0.6.11...v0.6.12) (2025-01-31)
+
+
+### Bug Fixes
+
+* better script name ([1a6fa77](https://github.com/primodiumxyz/indexer/commit/1a6fa77405a10a538084bc5997bfc36cb873b32a))
+
+
+
+
+
 ## [0.6.11](https://github.com/primodiumxyz/indexer/compare/v0.6.10...v0.6.11) (2025-01-31)
 
 
