@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.11](https://github.com/primodiumxyz/indexer/compare/v0.6.10...v0.6.11) (2025-01-31)
+
+
+### Bug Fixes
+
+* package version ([a9cc48c](https://github.com/primodiumxyz/indexer/commit/a9cc48c32a5c1bdd9d52e70b5b6f4bf01390c68b))
+
+
+
+
+
 ## [0.6.10](https://github.com/primodiumxyz/indexer/compare/v0.6.9...v0.6.10) (2025-01-31)
 
 
