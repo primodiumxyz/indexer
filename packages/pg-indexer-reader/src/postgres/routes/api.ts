@@ -1,15 +1,16 @@
-import { Sql } from "postgres";
-import { Middleware } from "koa";
-import Router from "@koa/router";
-import compose from "koa-compose";
-import { queryLogs } from "../queryLogs";
-import { recordToLog } from "../../util/recordToLog";
-import { debug, error } from "../../util/debug";
-import { createBenchmark } from "@latticexyz/common";
-import { compress } from "../../util/compress";
-import { dbQuerySchema, filterSchema } from "../querySchema";
-import { toSQL } from "../queryToSql";
 import { Readable } from "stream";
+import Router from "@koa/router";
+import { createBenchmark } from "@latticexyz/common";
+import { Middleware } from "koa";
+import compose from "koa-compose";
+import { Sql } from "postgres";
+
+import { queryLogs } from "@/postgres/queryLogs";
+import { dbQuerySchema, filterSchema } from "@/postgres/querySchema";
+import { toSQL } from "@/postgres/queryToSql";
+import { compress } from "@/util/compress";
+import { debug, error } from "@/util/debug";
+import { recordToLog } from "@/util/recordToLog";
 
 /**
  * API routes available to the frontend to read logs indexed to the database.

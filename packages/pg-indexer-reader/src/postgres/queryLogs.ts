@@ -1,10 +1,11 @@
 import { isNotNull } from "@latticexyz/common/utils";
+import { transformSchemaName } from "@latticexyz/store-sync/postgres";
 import { PendingQuery, Row, Sql } from "postgres";
 import { hexToBytes } from "viem";
 import { z } from "zod";
-import { transformSchemaName } from "@latticexyz/store-sync/postgres";
-import { Record } from "../util/common";
-import { filterSchema } from "./querySchema";
+
+import { filterSchema } from "@/postgres/querySchema";
+import { Record } from "@/util/common";
 
 const schemaName = transformSchemaName("mud");
 

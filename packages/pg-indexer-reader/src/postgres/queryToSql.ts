@@ -1,8 +1,9 @@
-import { Sql, PendingQuery, Row } from "postgres";
-import { Query, Record, convertIfHexOtherwiseReturnString } from "../util/common";
-import { snakeCase } from "change-case";
-import { isNotNull } from "@latticexyz/common/utils";
 import { hexToResource } from "@latticexyz/common";
+import { isNotNull } from "@latticexyz/common/utils";
+import { snakeCase } from "change-case";
+import { PendingQuery, Row, Sql } from "postgres";
+
+import { convertIfHexOtherwiseReturnString, Query, Record } from "@/util/common";
 
 /**
  * Function to convert a single condition into SQL.

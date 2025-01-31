@@ -1,6 +1,7 @@
-import { StorageAdapterLog } from "@latticexyz/store-sync";
 import { decodeDynamicField } from "@latticexyz/protocol-parser/internal";
-import { RecordData } from "./common";
+import { StorageAdapterLog } from "@latticexyz/store-sync";
+
+import { RecordData } from "@/util/common";
 
 /**
  * Convert a database record to a MUD typed log.

@@ -1,12 +1,15 @@
 #!/usr/bin/env node
+
 import "dotenv/config";
-import { z } from "zod";
-import Koa from "koa";
+
 import cors from "@koa/cors";
 import Router from "@koa/router";
+import Koa from "koa";
 import postgres from "postgres";
-import { frontendEnvSchema, parseEnv } from "./parseEnv";
-import { api } from "../src/postgres/routes/api";
+import { z } from "zod";
+
+import { frontendEnvSchema, parseEnv } from "@bin/parseEnv";
+import { api } from "@/postgres/routes/api";
 
 const env = parseEnv(
   z.intersection(

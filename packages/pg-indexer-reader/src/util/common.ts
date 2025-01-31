@@ -1,6 +1,7 @@
 import { Hex } from "viem";
 import { z } from "zod";
-import { dbQuerySchema, querySchema } from "../postgres/querySchema";
+
+import { dbQuerySchema, querySchema } from "@/postgres/querySchema";
 
 /**
  * Record data from the database.

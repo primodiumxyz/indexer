@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { isHex } from "viem";
+import { z } from "zod";
 
 /** Schema for filtering logs. */
 export const filterSchema = z.object({
