@@ -1,30 +1,28 @@
 #!/usr/bin/env node
+
 import "dotenv/config";
-import { z } from "zod";
-import Koa from "koa";
+
 import cors from "@koa/cors";
 import Router from "@koa/router";
+import Koa from "koa";
 import postgres from "postgres";
-import { frontendEnvSchema, parseEnv } from "./parseEnv";
-import { api } from "../src/postgres/routes/api";
-// import { registerSentryMiddlewares } from "../src/sentry";
+import { z } from "zod";
+
+import { frontendEnvSchema, parseEnv } from "@bin/parseEnv";
+import { api } from "@/postgres/routes/api";
 
 const env = parseEnv(
   z.intersection(
     frontendEnvSchema,
     z.object({
       DATABASE_URL: z.string(),
-    })
-  )
+    }),
+  ),
 );
 
 const database = postgres(env.DATABASE_URL, { prepare: false });
 
 const server = new Koa();
-
-// if (process.env.SENTRY_DSN) {
-//   registerSentryMiddlewares(server);
-// }
 
 server.use(cors());
 server.use(api(database));
@@ -46,7 +44,5 @@ router.get("/readyz", (ctx) => {
 server.use(router.routes());
 server.use(router.allowedMethods());
 
-server.listen({ host: env.HOST, port: env.PORT });
-console.log(
-  `postgres indexer frontend listening on http://${env.HOST}:${env.PORT}`
-);
+server.listen({ host: env.INDEXER_HOST, port: env.INDEXER_PORT });
+console.log(`postgres indexer frontend listening on http://${env.INDEXER_HOST}:${env.INDEXER_PORT}`);

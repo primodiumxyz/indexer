@@ -2,9 +2,9 @@ import { groupLogsByBlockNumber } from "@latticexyz/block-logs-stream";
 import { storeEventsAbi } from "@latticexyz/store";
 import { PublicClient, WatchEventReturnType } from "viem";
 
-import { createLogFilter } from "../../utils/common";
-import { LogFilter, Reader, ReaderSubscribeRpcParams, StorageAdapterBlock } from "../../types";
-import { debug, error } from "../../utils/debug";
+import { LogFilter, Reader, ReaderSubscribeRpcParams, StorageAdapterBlock } from "@/types";
+import { createLogFilter } from "@/utils/common";
+import { debug, error } from "@/utils/debug";
 
 type Subscription = {
   id: number;
@@ -15,10 +15,18 @@ type Subscription = {
 const clients = new Map<PublicClient, Subscription[]>();
 const clientWatchers = new Map<PublicClient, WatchEventReturnType>();
 
+/**
+ * Subscribes to logs for a given public client.
+ *
+ * @param publicClient - The public client to subscribe to
+ * @param filter - The filter to apply
+ * @param callback - The callback to call when logs are received
+ * @returns The subscription ID
+ */
 function subscribe(
   publicClient: PublicClient,
   filter: LogFilter["filters"],
-  callback: (block: StorageAdapterBlock) => void
+  callback: (block: StorageAdapterBlock) => void,
 ): number {
   const subs = clients.get(publicClient);
 
@@ -30,6 +38,12 @@ function subscribe(
   return id;
 }
 
+/**
+ * Unsubscribes from logs for a given public client.
+ *
+ * @param publicClient - The public client to unsubscribe from
+ * @param subscriptionId - The subscription ID
+ */
 function unsubscribe(publicClient: PublicClient, subscriptionId: number): void {
   const subs = clients.get(publicClient);
 
@@ -51,12 +65,17 @@ function unsubscribe(publicClient: PublicClient, subscriptionId: number): void {
 
   clients.set(
     publicClient,
-    subs.filter((sub) => sub.id !== subscriptionId)
+    subs.filter((sub) => sub.id !== subscriptionId),
   );
 
   debug(`unsub event - client: ${publicClient.name}, id: ${subscriptionId}, subs: ${subs.length - 1}`);
 }
 
+/**
+ * Initializes a watch event for a given public client.
+ *
+ * @param args - The {@link ReaderSubscribeRpcParams}
+ */
 function initializeWatchEvent(args: ReaderSubscribeRpcParams) {
   const { publicClient, address } = args;
 
@@ -85,7 +104,7 @@ function initializeWatchEvent(args: ReaderSubscribeRpcParams) {
         const filteredLogs = filter ? logs.filter(createLogFilter(filter)) : logs;
         const blocks = groupLogsByBlockNumber(filteredLogs) as StorageAdapterBlock[];
         debug(
-          `client: ${publicClient.name}, subs: ${subs.length}: logs: ${logs.length}, filteredLogs: ${filteredLogs.length}, blocks: ${blocks.length}`
+          `client: ${publicClient.name}, subs: ${subs.length}: logs: ${logs.length}, filteredLogs: ${filteredLogs.length}, blocks: ${blocks.length}`,
         );
         for (const block of blocks) {
           callback(block);
@@ -100,6 +119,12 @@ function initializeWatchEvent(args: ReaderSubscribeRpcParams) {
   clientWatchers.set(publicClient, unsub);
 }
 
+/**
+ * Initializes a subscription to logs for a given public client if it doesn't already exist.
+ *
+ * @param args - The {@link ReaderSubscribeRpcParams}
+ * @returns A {@link Reader}
+ */
 export function subscribeLogs(args: ReaderSubscribeRpcParams): Reader {
   if (!clients.has(args.publicClient)) {
     initializeWatchEvent(args);

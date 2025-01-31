@@ -3,10 +3,7 @@
     "module": "esnext",
     "moduleResolution": "Bundler",
     "target": "es2021",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -15,6 +12,11 @@
     "resolveJsonModule": true,
     "emitDeclarationOnly": true,
     "declarationMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@primodiumxyz/pg-indexer-reader/*": ["../pg-indexer-reader/src/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

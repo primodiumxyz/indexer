@@ -2,6 +2,7 @@
 import { execSync } from "child_process";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+
 const currentDir = dirname(fileURLToPath(import.meta.url));
 const packageDir = join(currentDir, "..");
 

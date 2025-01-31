@@ -1,14 +1,20 @@
-import { Read } from "../../read";
-import { createSync } from "./customSync";
-import { Write } from "../../write";
+import { Read } from "@/read";
+import { createSync } from "@/sync/factories/customSync";
 import {
   ReaderFilterIndexerParams,
   ReaderFilterRpcParams,
   ReaderQueryDecodedIndexerParams,
   ReaderSubscribeRpcParams,
   WriterRecsParams,
-} from "../../types";
+} from "@/types";
+import { Write } from "@/write";
 
+/**
+ * Creates a live RPC sync using Recs.
+ *
+ * @param args - The {@link ReaderSubscribeRpcParams} & {@link WriterRecsParams}
+ * @returns A {@link Sync}
+ */
 export function liveRPCRecsSync(args: ReaderSubscribeRpcParams & WriterRecsParams) {
   const { world, tables, address, logFilter, publicClient } = args;
 
@@ -22,6 +28,12 @@ export function liveRPCRecsSync(args: ReaderSubscribeRpcParams & WriterRecsParam
   });
 }
 
+/**
+ * Creates a filtered RPC sync using Recs.
+ *
+ * @param args - The {@link ReaderFilterRpcParams} & {@link WriterRecsParams}
+ * @returns A {@link Sync}
+ */
 export function RPCRecsSync(args: ReaderFilterRpcParams & WriterRecsParams) {
   const { world, tables, address, filter, publicClient, fromBlock, toBlock, maxBlockRange, maxRetryCount } = args;
 
@@ -39,6 +51,12 @@ export function RPCRecsSync(args: ReaderFilterRpcParams & WriterRecsParams) {
   });
 }
 
+/**
+ * Creates a filtered indexer sync using Recs.
+ *
+ * @param args - The {@link WriterRecsParams} & {@link ReaderFilterIndexerParams}
+ * @returns A {@link Sync}
+ */
 export function filterIndexerRecsSync(args: WriterRecsParams & ReaderFilterIndexerParams) {
   const { world, tables, filter, indexerUrl } = args;
 
@@ -51,6 +69,12 @@ export function filterIndexerRecsSync(args: WriterRecsParams & ReaderFilterIndex
   });
 }
 
+/**
+ * Creates a query decoded indexer sync using Recs.
+ *
+ * @param args - The {@link WriterRecsParams} & {@link ReaderQueryDecodedIndexerParams}
+ * @returns A {@link Sync}
+ */
 export const queryDecodedIndexerRecsSync = (args: WriterRecsParams & ReaderQueryDecodedIndexerParams) => {
   const { world, tables, indexerUrl, query } = args;
 

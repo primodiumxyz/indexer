@@ -1,8 +1,15 @@
-import { EventEmitter } from "eventemitter3";
 import { fetchLogs } from "@latticexyz/block-logs-stream";
 import { storeEventsAbi } from "@latticexyz/store";
-import { ReaderFilterRpcParams, Reader } from "../../types";
+import { EventEmitter } from "eventemitter3";
 
+import { Reader, ReaderFilterRpcParams } from "@/types";
+
+/**
+ * Creates a reader for filtered RPC logs.
+ *
+ * @param args - The {@link ReaderFilterRpcParams}
+ * @returns A {@link Reader}
+ */
 export function filterLogs(args: ReaderFilterRpcParams): Reader {
   return {
     subscribe: (userCallback, errorCallback) => {

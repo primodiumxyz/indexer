@@ -1,6 +1,7 @@
-import { StorageAdapterLog, Writer, WriterAdapterFunctions } from "../../types";
-import { debug } from "../../utils/debug";
+import { StorageAdapterLog, Writer, WriterAdapterFunctions } from "@/types";
+import { debug } from "@/utils/debug";
 
+/** A custom writer that takes a set of {@link WriterAdapterFunctions} to process various types of incoming logs. */
 export function createWriter(storeFn: WriterAdapterFunctions): Writer {
   return (log: StorageAdapterLog) => {
     switch (log.eventName) {

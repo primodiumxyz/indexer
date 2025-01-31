@@ -3,9 +3,33 @@
 ## Getting Started
 
 ### Requirements
+
 - Node 14+
 - Docker
 - pnpm
+
+### Environment
+
+Add the following environment variables to your `.env` file:
+
+```bash
+# Configuration for the MUD indexer writer
+START_BLOCK=0n # The block it should start indexing from
+MAX_BLOCK_RANGE=1000 # The maximum amount of blocks to fetch and store per batch
+POLLING_INTERVAL=1000 # The polling interval in milliseconds
+STORE_ADDRESS=0x0000000000000000000000000000000000000000 # The address of the world contract
+RPC_HTTP_URL=http://localhost:8545 # The URL of the RPC HTTP endpoint
+RPC_WS_URL=ws://localhost:8545 # The URL of the RPC WebSocket endpoint
+
+# If you would like to change the default host and port the indexer will run on
+INDEXER_HOST=0.0.0.0
+INDEXER_PORT=3001
+
+# Add the database url for the postgres-frontend script
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
+```
+
+### Running the indexer
 
 To start a local indexer on foundry chain run:
 

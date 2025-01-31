@@ -1,7 +1,14 @@
 import { EventEmitter } from "eventemitter3";
-import { ReaderFilterIndexerParams, Reader, StorageAdapterBlock } from "../../types";
-import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
 
+import { Reader, ReaderFilterIndexerParams, StorageAdapterBlock } from "@/types";
+import { isStorageAdapterBlockIndexer, processJSONStream } from "@/utils/common";
+
+/**
+ * Creates a reader for filtered indexer logs.
+ *
+ * @param args - The {@link ReaderFilterIndexerParams}
+ * @returns A {@link Reader}
+ */
 export const filterLogs = (args: ReaderFilterIndexerParams): Reader => {
   const { indexerUrl, filter } = args;
   return {
