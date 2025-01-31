@@ -1,5 +1,6 @@
 {
   "name": "@primodiumxyz/mud-state-tools",
+  "version": "0.0.1",
   "description": "Set of tools for reading data in MUD compliant projects.",
   "scripts": {
     "lerna-publish": "lerna publish",
