@@ -14,6 +14,7 @@
     "declarationMap": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@primodiumxyz/pg-indexer-reader/*": ["../pg-indexer-reader/src/*"]
     }
   },

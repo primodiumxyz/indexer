@@ -3,6 +3,7 @@ import * as rpc from "./rpc";
 
 indexer.filterLogs;
 
+/** A factory for creating a specific indexer reader. */
 export const Read = {
   fromDecodedIndexer: {
     filter: indexer.filterLogs,

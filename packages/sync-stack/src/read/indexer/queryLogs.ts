@@ -1,8 +1,15 @@
 import { EventEmitter } from "eventemitter3";
-import { ReaderQueryDecodedIndexerParams, Reader, StorageAdapterBlock } from "../../types";
-import { isStorageAdapterBlockIndexer, processJSONStream } from "../../utils/common";
-import { dbQuerySchema } from "../../../../pg-indexer-reader/src/postgres/querySchema";
 
+import { dbQuerySchema } from "@primodiumxyz/pg-indexer-reader/postgres/querySchema";
+import { Reader, ReaderQueryDecodedIndexerParams, StorageAdapterBlock } from "@/types";
+import { isStorageAdapterBlockIndexer, processJSONStream } from "@/utils/common";
+
+/**
+ * Creates a reader for query decoded indexer logs.
+ *
+ * @param params - The {@link ReaderQueryDecodedIndexerParams}
+ * @returns A {@link Reader}
+ */
 export const queryLogs = (params: ReaderQueryDecodedIndexerParams): Reader => {
   const { indexerUrl, query } = params;
   return {

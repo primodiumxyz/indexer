@@ -1,5 +1,6 @@
-import { createWriter } from "./createWriter";
+import { createWriter } from "@/write/writers/createWriter";
 
+/** A writer that logs to the console. */
 export const consoleWriter = createWriter({
   delete(log) {
     console.log("delete", log);

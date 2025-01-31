@@ -1,13 +1,14 @@
 import { hexToResource, spliceHex } from "@latticexyz/common";
-import { getComponentValue, removeComponent, setComponent } from "@latticexyz/recs";
 import { decodeValueArgs } from "@latticexyz/protocol-parser/internal";
+import { getComponentValue, removeComponent, setComponent } from "@latticexyz/recs";
 import { Hex, size } from "viem";
 
-import { createWriter } from "./createWriter";
-import { debug } from "../../utils/debug";
-import { flattenSchema, hexKeyTupleToEntity } from "../../utils/recs";
-import { StorageAdapterLog, WriterRecsParams } from "../../types";
+import { StorageAdapterLog, WriterRecsParams } from "@/types";
+import { debug } from "@/utils/debug";
+import { flattenSchema, hexKeyTupleToEntity } from "@/utils/recs";
+import { createWriter } from "@/write/writers/createWriter";
 
+/** An original Recs writer. */
 export const recsWriter = ({ world, tables }: WriterRecsParams) => {
   function processLog(log: StorageAdapterLog) {
     const { namespace, name } = hexToResource(log.args.tableId);

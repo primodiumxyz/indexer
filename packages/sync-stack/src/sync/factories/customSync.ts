@@ -1,5 +1,11 @@
-import { Reader, SyncFunctions, SyncOptions } from "../../types";
+import { Reader, SyncFunctions, SyncOptions } from "@/types";
 
+/**
+ * Creates a set of sync functions with custom reader & writer logic..
+ *
+ * @param options - The {@link SyncOptions}
+ * @returns A {@link SyncFunctions}
+ */
 export function createSync(options: SyncOptions): SyncFunctions {
   const { reader, writer } = options;
   const unsubscribe: (() => void)[] = [];
@@ -14,7 +20,7 @@ export function createSync(options: SyncOptions): SyncFunctions {
               Array.isArray(writer) ? writer.forEach((write) => write(log)) : writer(log);
             }
             onProgress && onProgress(index, block.blockNumber, block.progress ?? 1);
-          }, error)
+          }, error),
         );
       }
 
