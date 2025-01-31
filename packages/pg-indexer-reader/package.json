@@ -1,6 +1,6 @@
 {
   "name": "@primodiumxyz/pg-indexer-reader",
-  "version": "0.6.13",
+  "version": "0.6.14",
   "description": "Minimal Typescript indexer for Store",
   "repository": {
     "type": "git",
@@ -66,5 +66,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "3d81004855cadcbdbefc6a12221e695a7eeb2408"
+  "gitHead": "e8b1840690ebcc7e2db7cb25eb5d8fadb4d5b2d8"
 }
